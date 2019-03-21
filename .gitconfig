@@ -1,0 +1,11 @@
+[user]
+	name = Gaurav Singh
+	email = gs1293@gmail.com
+[color]
+	ui = auto
+	status = auto
+	branch = auto
+[core]
+	editor = /usr/bin/vim
+[merge]
+	tool = vimdiff
