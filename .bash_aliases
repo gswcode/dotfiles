@@ -20,7 +20,7 @@ alias p="python3"
 
 alias refresh="source ~/.bashrc"
 
-alias myupdate="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y"
+alias myupdate="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y; sudo snap refresh"
 
 alias ..='cd ..'
 alias ..2='..; ..'
@@ -30,3 +30,5 @@ alias ..5='..4; ..'
 
 # setxkbmap -option ctrl:nocaps
 # xcape -e 'Control_L=Escape'
+
+neofetch

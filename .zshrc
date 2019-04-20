@@ -114,6 +114,11 @@ alias ei="vim ~/.inputrc"
 alias e3="vim ~/.config/i3/config"
 alias p="python3"
 alias sz="source ~/.zshrc"
-alias myupdate="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y"
+alias myupdate="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y; sudo snap refresh"
+alias install="sudo apt install"
 
 # zsh-history-substring-search
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+neofetch

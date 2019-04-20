@@ -686,3 +686,9 @@ vmap gx <Plug>(openbrowser-smart-search)
 
 set tabpagemax=50
 " set mousemodel=extend
+
+" To prevent conceal in LaTeX files
+let g:tex_conceal=''
+
+" To prevent conceal in any file
+set conceallevel=0
