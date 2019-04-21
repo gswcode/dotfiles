@@ -1,0 +1,60 @@
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+
+    srand(time(NULL));
+
+    ifstream fin_1 ;
+    ifstream fin_2 ;
+    ofstream fout  ;
+
+    fin_1.open("input1") ;
+    fin_2.open("input2") ;
+    fout.open("output")  ;
+
+    int *arr = new int [10];
+
+    int **ary = new int*[10];
+    for(int i = 0; i < 10; i++)
+    {
+        ary[i] = new int[10];
+    }
+
+    for(int i=0; i<10; i++)
+    {
+        fin_1 >> arr[i];
+    }
+
+    for(int i=0; i<10; i++)
+    {
+        for(int j=0; j<10; j++)
+        {
+            fin_2 >> ary[i][j];
+        }
+    }
+
+    for(int i=0; i<10; i++)
+    {
+        fout<<rand()%100<<endl;
+    }
+
+    for(int i = 0; i < 10; ++i)
+    {
+        delete [] ary[i];
+    }
+    delete [] ary;
+
+    delete [] arr;
+
+    fin_1.close() ;
+    fin_2.close() ;
+    fout.close()  ;
+
+    return 0;
+}

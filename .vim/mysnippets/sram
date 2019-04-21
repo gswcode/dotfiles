@@ -1,0 +1,18 @@
+sram_model #(
+    .DEPTH      ('d),     //total size
+    .WIDTH      ('d),     //data bit width
+    .A_WIDTH    ('d)      //address bit width
+)
+u_sram_model_1(
+  .CLKA     (CLK),
+  .ENA      (),  //cen
+  .WEA      (),  //wen
+  .ADDRA    (),  //addr
+  .DINA     (),  //wrdata
+  .CLKB     (CLK),
+  .ENB      (),  //cen
+  .ADDRB    (),  //addr
+  .DOUTB    (),  //rddata
+  .VLDB     ()
+);
+

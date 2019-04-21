@@ -1,0 +1,12 @@
+//*****************************Min/Max functions******************************//
+
+function [31:0] min (input [31:0] a, input [31:0] b);
+    min = a > b ? b:a;
+endfunction
+
+function [31:0] max (input [31:0] a, input [31:0] b);
+    max = a > b ? a:b;
+endfunction
+
+//*****************************************************************************//
+

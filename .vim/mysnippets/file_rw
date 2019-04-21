@@ -1,0 +1,41 @@
+
+FILE* file_handle_1;
+FILE* file_handle_2;
+
+file_handle_1  = fopen("c_input/file1","w");
+file_handle_2  = fopen("c_input/file2","w");
+
+int debug=0;
+
+void printreq(const Pel* pixeladd,Int Height,Int Width,Int Stride, int flag)
+{
+    int pixelvalue;
+
+    for(int i=0;i<Height;i++)
+    {
+        for(int j=0;j<Width;j++)
+        {
+            pixelvalue = *(pixeladd+j);
+            if(debug%2==0)
+            {
+                if(flag==1) fprintf(file_handle_1,"%d ",pixelvalue);
+                else        fprintf(file_handle_2,"%d ",pixelvalue);
+            }
+            cout<<pixelvalue<<" ";
+        }
+        pixeladd+=Stride;
+    }
+    if(debug%2==0)
+    {
+        if(flag==1) fprintf(file_handle_1,"\n");
+        else        fprintf(file_handle_2,"\n");
+    }
+    cout<<"\n";
+}
+  if(Width==16 && Height==16)
+  {
+      print++;
+      if(debug%2==0)    fprintf(file_handle_13,"%d\n",rcMv.getHor());
+      if(debug%2==0)    fprintf(file_handle_14,"%d\n",rcMv.getVer());
+  }
+

@@ -1,0 +1,6 @@
+        input           [ 9:0]  I_MEM1_RDDATA,
+        output  reg             O_MEM1_CEN   ,
+        output  reg             O_MEM1_WEN   ,
+        output  reg     [12:0]  O_MEM1_ADDR  ,
+        output  reg     [ 9:0]  O_MEM1_WRDATA,
+

@@ -1,0 +1,15 @@
+/*********************************Column_Counter**********************************/
+
+reg  [11:0] cnt_col;
+
+always @ (posedge CLK or negedge RESET_N)
+begin
+	if (!RESET_N)
+	    cnt_col <= 12'b0;
+	else if (I_VSYNC || I_HSYNC)
+		cnt_col <= 12'b0;
+	else if (I_EN)
+		cnt_col <= cnt_col + 1'b1;
+end
+
+/**********************************************************************************/

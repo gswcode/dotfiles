@@ -1,0 +1,15 @@
+/*********************************Row_Counter**************************************/
+
+reg  [11:0] cnt_row;
+
+always @ (posedge CLK or negedge RESET_N)
+begin
+	if (!RESET_N)
+		cnt_row <= 12'b0;
+	else if (I_VSYNC)
+		cnt_row <= 12'b0;
+	else if (I_EN && !r_en[0])
+		cnt_row <= cnt_row + 1'b1;
+end
+
+/**********************************************************************************/

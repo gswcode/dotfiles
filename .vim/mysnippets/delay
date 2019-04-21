@@ -1,0 +1,2 @@
+LP_DELAY_I #(10,delay,0,0,0)    LP_DELAY_I_1(.i_reset_n(RESET_N), .i_clk(CLK), .i_din(), .o_dout(), .i_clk_en(1'b0), .i_fill_en(1'b0), .i_fill_din (10'b0));
+

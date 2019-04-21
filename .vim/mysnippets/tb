@@ -1,0 +1,91 @@
+// include all modules here or create a filelist and use -f filelist in irun
+`include ""
+
+module TB;
+
+integer a,b,c,d;
+
+//Inputs - reg and OUtputs - wire
+reg  clk        ;
+reg  reset_n    ;
+reg  i_vsync    ;
+reg  i_me_start ;
+reg  i_input_bw ;
+
+//Module Instantiation
+MODULE U_MODULE
+(
+);
+
+//File pointers
+integer file_handle_1 ;
+integer file_handle_2 ;
+
+//Inputs from command line arguments
+reg [500:0] path      ;
+reg [ 21:0] test_cases;
+
+initial
+begin
+      if($value$plusargs("PAATH=%s",path))               $display("path       = %0s", path);
+      if($value$plusargs("TEST_CASES=%d",test_cases))    $display("test_cases = %d", test_cases);
+      if($value$plusargs("INPUTBITWIDTH=%d",i_input_bw)) $display("i_input_bw = %d", i_input_bw);
+end
+
+reg [9:0] mem_sr [0:1023];
+reg [9:0] mem_cu [0:255];
+
+integer var1, var2, var3, var4;
+
+initial
+begin
+    file_handle_1  = $fopen($sformatf("%0s/c_input/sr",path),"r");
+    file_handle_2  = $fopen($sformatf("%0s/output/o_mv1_x",path),"w");
+    clk            =   1'b0;
+    reset_n        =   1'b0;
+    i_me_start     =   1'b0;
+    for( b=0; b<11'd1024; b=b+1)
+    begin
+        mem_sr[b] = 10'd0;
+    end
+    for( c=0; c<9'd256; c=c+1)
+    begin
+        mem_cu[c] = 10'd0;
+    end
+    #26    reset_n = 1'b1;
+    #10    reset_n = 1'b0;
+    #10    reset_n = 1'b1;
+    #100   i_vsync = 1'b1;
+    #10    i_vsync = 1'b0;
+    for( a=0; a<test_cases; a=a+1)
+    begin
+        #2700   i_me_start  = 1'b1;
+        for( b=0; b<11'd1024; b=b+1)
+        begin
+            var1 = $fscanf(file_handle_1,"%d",mem_sr[b]);
+        end
+        for( c=0; c<9'd256; c=c+1)
+        begin
+            var2 = $fscanf(file_handle_2,"%d",mem_cu[c]);
+        end
+        #10     i_me_start  = 1'b0;
+    end
+    #2700
+    $fclose(file_handle_1 );
+    $fclose(file_handle_2 );
+    #100   $finish;
+end //}
+
+always
+    #5 clk = !clk;
+
+always @(posedge clk)
+begin
+    if(o_ctu_done)
+    begin
+        //$fwrite(file_handle_3 ,"%0d\n",o_8x8_mv_x1);
+        //$fwrite(file_handle_4 ,"%0d\n",o_8x8_mv_y1);
+    end
+end
+
+endmodule

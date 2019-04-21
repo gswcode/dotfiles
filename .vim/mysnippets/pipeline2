@@ -1,0 +1,26 @@
+/*********************************INPUT ENABLE PIPELINE**********************************/
+
+reg  r_en   ;
+reg  r_en_d ;
+reg  r_en_2d;
+reg  r_en_3d;
+
+always @(posedge CLK or negedge RESET_N)
+begin
+    if(!RESET_N)
+    begin
+        r_en    <= 1'b0;
+        r_en_d  <= 1'b0;
+        r_en_2d <= 1'b0;
+        r_en_3d <= 1'b0;
+    end
+    else
+    begin
+        r_en    <= I_EN   ;
+        r_en_d  <= r_en   ;
+        r_en_2d <= r_en_d ;
+        r_en_3d <= r_en_2d;
+    end
+end
+
+/************************************************************************************/

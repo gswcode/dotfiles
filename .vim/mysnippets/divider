@@ -1,0 +1,21 @@
+DW_div_pipe #(
+    .a_width        (32        ),
+    .b_width        (32        ),
+    .tc_mode        (0         ),
+    .rem_mode       (1         ),
+    .num_stages     (NUM_STAGES),
+    .stall_mode     (1         ),
+    .rst_mode       (1         ),
+    .op_iso_mode    (0         )
+)
+divider_1(
+    .clk            (CLK    ),
+    .rst_n          (RESET_N),
+    .en             (1'b1   ),
+    .a              (       ),
+    .b              (       ),
+    .quotient       (       ),
+    .remainder      (       ),
+    .divide_by_0    (       )
+);
+

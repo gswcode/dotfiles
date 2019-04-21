@@ -1,0 +1,31 @@
+/************************************MODULE DEFINITION (I/O)*************************************/
+
+module MODULE_NAME
+(
+
+    input                         CLK     ,
+    input                         RESET_N ,
+
+    input                         I_VSYNC ,
+    input                         I_HSYNC ,
+
+    input               [11:0]    I_WIDTH ,
+    input               [11:0]    I_HEIGHT,
+
+    input                         I_EN    ,
+
+    input               [ 9:0]    I_DATA_1,
+    input               [ 9:0]    I_DATA_2,
+    input               [ 9:0]    I_DATA_3,
+
+    output reg          [ 9:0]    O_DATA_1,
+    output reg          [ 9:0]    O_DATA_2,
+    output reg          [ 9:0]    O_DATA_3,
+
+    output                        O_EN
+
+);
+
+endmodule
+
+/*******************************************END OF MODULE********************************************/

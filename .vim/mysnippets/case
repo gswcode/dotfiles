@@ -1,0 +1,35 @@
+reg  [2:0] r_state;
+
+always @(posedge CLK or negedge RESET_N)
+begin
+    if(!RESET_N)
+    begin
+        r_state <= IDLE;
+    end
+    else
+    begin
+        case (r_state)
+            IDLE:
+                    begin
+                    end
+            CASE_1:
+                    begin
+                    end
+            CASE_2:
+                    begin
+                    end
+            CASE_3:
+                    begin
+                    end
+            END:
+                    begin
+                        r_state <= IDLE;
+                    end
+            default:
+                    begin
+                        r_state <= IDLE;
+                    end
+        endcase
+    end
+end
+

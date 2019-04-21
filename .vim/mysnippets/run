@@ -1,0 +1,110 @@
+#!/bin/bash
+
+#############################################################################################################
+
+num="001"  # Change the value of num to Verify whichever config file is needs to be verified
+
+cfg_file="cfg/basic_$num.cfg"
+
+printf "Clearing any previous dumps\n"
+
+rm -rf c_input/ c_output/
+
+printf "Generating new C dump\n"
+
+cd ../C_MODEL/HEVC/build/linux/
+
+make all > /dev/null
+
+cd ../../
+
+bin/TAppEncoderStatic -c cfg/encoder_woc_444_p.cfg -c "../../SIM/$cfg_file"
+
+cd ../../SIM/
+
+cp -rf ../C_MODEL/HEVC/c_input .
+cp -rf ../C_MODEL/HEVC/c_output .
+
+#############################################################################################################
+
+width=`grep SourceWidth $cfg_file | awk '{print $3}'`
+height=`grep SourceHeight $cfg_file | awk '{print $3}'`
+input_bw=`grep InputBitDepth $cfg_file | awk '{print $3}'`
+frames=`grep FramesToBeEncoded $cfg_file | awk '{print $3}'`
+frames=`expr $frames - 1`
+
+if (( $height % 16 != 0 ))
+then
+    height=`expr $height + 8`
+fi
+
+a=`expr $width \* $height`
+
+testcases=`expr $a / 256`
+
+temp="$testcases""d"
+
+file_path="../SIM/"
+
+frame_num=1
+
+#############################################################################################################
+
+while [ $frame_num -le $frames ];
+do
+    
+    printf "\nTesting Frame Number : $frame_num\n"
+    
+    vcs -i +v2k -q -licqueue -full64 -timescale=1ns/1ns ../TB/TB.v +plusarg_save +PAATH=$file_path +TEST_CASES=$testcases +INPUTBITWIDTH=$input_bw
+    simv -i
+    rm -rf csrc/ env.log simv simv.daidir/ ucli.key
+   
+    if ( 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv1_x") <(head -$testcases "$file_path/output/o_mv1_x") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv1_y") <(head -$testcases "$file_path/output/o_mv1_y") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv2_x") <(head -$testcases "$file_path/output/o_mv2_x") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv2_y") <(head -$testcases "$file_path/output/o_mv2_y") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv3_x") <(head -$testcases "$file_path/output/o_mv3_x") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv3_y") <(head -$testcases "$file_path/output/o_mv3_y") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv4_x") <(head -$testcases "$file_path/output/o_mv4_x") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv4_y") <(head -$testcases "$file_path/output/o_mv4_y") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv5_x") <(head -$testcases "$file_path/output/o_mv5_x") > /dev/null) && 
+         (diff -q <(head -$testcases "$file_path/c_output/o_mv5_y") <(head -$testcases "$file_path/output/o_mv5_y") > /dev/null)   
+       )
+    then
+        printf "Passed\n"
+        sed -i "1,$temp" "$file_path/c_input/sr"
+        sed -i "1,$temp" "$file_path/c_input/ctu16x16"
+        sed -i "1,$temp" "$file_path/c_input/i_gmv_x"
+        sed -i "1,$temp" "$file_path/c_input/i_gmv_y"
+        sed -i "1,$temp" "$file_path/c_output/o_mv1_x"
+        sed -i "1,$temp" "$file_path/c_output/o_mv1_y"
+        sed -i "1,$temp" "$file_path/c_output/o_mv2_x"
+        sed -i "1,$temp" "$file_path/c_output/o_mv2_y"
+        sed -i "1,$temp" "$file_path/c_output/o_mv3_x"
+        sed -i "1,$temp" "$file_path/c_output/o_mv3_y"
+        sed -i "1,$temp" "$file_path/c_output/o_mv4_x"
+        sed -i "1,$temp" "$file_path/c_output/o_mv4_y"
+        sed -i "1,$temp" "$file_path/c_output/o_mv5_x"
+        sed -i "1,$temp" "$file_path/c_output/o_mv5_y"
+    else
+        printf "Failed\n"
+        head -$testcases "$file_path/c_input/sr"       >> "$file_path/failed/sr"       && sed -i "1,$temp" "$file_path/c_input/sr"
+        head -$testcases "$file_path/c_input/ctu16x16" >> "$file_path/failed/ctu16x16" && sed -i "1,$temp" "$file_path/c_input/ctu16x16"
+        head -$testcases "$file_path/c_input/i_gmv_x"  >> "$file_path/failed/i_gmv_x"  && sed -i "1,$temp" "$file_path/c_input/i_gmv_x"
+        head -$testcases "$file_path/c_input/i_gmv_y"  >> "$file_path/failed/i_gmv_y"  && sed -i "1,$temp" "$file_path/c_input/i_gmv_y"
+        head -$testcases "$file_path/c_output/o_mv1_x" >> "$file_path/failed/o_mv1_x"  && sed -i "1,$temp" "$file_path/c_output/o_mv1_x"
+        head -$testcases "$file_path/c_output/o_mv1_y" >> "$file_path/failed/o_mv1_y"  && sed -i "1,$temp" "$file_path/c_output/o_mv1_y"
+        head -$testcases "$file_path/c_output/o_mv2_x" >> "$file_path/failed/o_mv2_x"  && sed -i "1,$temp" "$file_path/c_output/o_mv2_x"
+        head -$testcases "$file_path/c_output/o_mv2_y" >> "$file_path/failed/o_mv2_y"  && sed -i "1,$temp" "$file_path/c_output/o_mv2_y"
+        head -$testcases "$file_path/c_output/o_mv3_x" >> "$file_path/failed/o_mv3_x"  && sed -i "1,$temp" "$file_path/c_output/o_mv3_x"
+        head -$testcases "$file_path/c_output/o_mv3_y" >> "$file_path/failed/o_mv3_y"  && sed -i "1,$temp" "$file_path/c_output/o_mv3_y"
+        head -$testcases "$file_path/c_output/o_mv4_x" >> "$file_path/failed/o_mv4_x"  && sed -i "1,$temp" "$file_path/c_output/o_mv4_x"
+        head -$testcases "$file_path/c_output/o_mv4_y" >> "$file_path/failed/o_mv4_y"  && sed -i "1,$temp" "$file_path/c_output/o_mv4_y"
+        head -$testcases "$file_path/c_output/o_mv5_x" >> "$file_path/failed/o_mv5_x"  && sed -i "1,$temp" "$file_path/c_output/o_mv5_x"
+        head -$testcases "$file_path/c_output/o_mv5_y" >> "$file_path/failed/o_mv5_y"  && sed -i "1,$temp" "$file_path/c_output/o_mv5_y"
+    fi
+        frame_num=`expr $frame_num + 1`
+done
+
+#############################################################################################################

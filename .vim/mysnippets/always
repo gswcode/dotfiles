@@ -1,0 +1,12 @@
+always @(posedge CLK or negedge RESET_N)
+begin
+    if(!RESET_N)
+    begin
+         <= 'b0;
+    end
+    else if()
+    begin
+         <= ;
+    end
+end
+
