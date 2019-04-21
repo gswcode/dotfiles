@@ -1,2 +1,2 @@
 # dotfiles
-Latest linux configuration files
+Latest linux configuration and dotfiles
