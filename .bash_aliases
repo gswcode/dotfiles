@@ -8,6 +8,8 @@ alias gd="gvimdiff"
 
 alias c="clear"
 
+alias r="ranger"
+
 alias eb="vim ~/.bash_aliases"
 
 alias ev="vim ~/.vimrc"
@@ -31,4 +33,4 @@ alias ..5='..4; ..'
 # setxkbmap -option ctrl:nocaps
 # xcape -e 'Control_L=Escape'
 
-neofetch
+# neofetch

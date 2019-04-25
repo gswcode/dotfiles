@@ -36,11 +36,16 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/i3/rofi -matching fuzzy
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+#switch workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # change focus
 bindsym $mod+j focus left
@@ -92,11 +97,17 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "1: Terminal "
-set $workspace2 "2: Browser "
-set $workspace3 "3: Music "
-set $workspace4 "4: Video "
-set $workspace5 "5: Torrents "
+# Naming Workspace's
+set $workspace1  "1: Terminal "
+set $workspace2  "2: Browser "
+set $workspace3  "3: Music "
+set $workspace4  "4: Video "
+set $workspace5  "5: Torrents "
+set $workspace6  "6: PDF "
+set $workspace7  "7"
+set $workspace8  "8"
+set $workspace9  "9"
+set $workspace10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -104,11 +115,11 @@ bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -116,14 +127,19 @@ bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
-assign [class="Gnome-terminal"] $workspace1
+# assign applications to specific workspaces
+# assign [class="Gnome-terminal"] $workspace1
 assign [class="Google-chrome"] $workspace2
+assign [class="vlc"] $workspace4
+assign [class="mpv"] $workspace4
+assign [class="qBittorrent"] $workspace5
+assign [class="Zathura"] $workspace6
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -131,6 +147,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# lock using i3lock
+bindsym $mod+Shift+x exec i3lock
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -140,16 +158,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -161,31 +179,69 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command i3blocks
+        # status_command i3status
+        position top
+        strip_workspace_numbers yes
+        # mode hide
+        # hidden_state hide
+        # modifier Mod1
 }
 
 # User added bindings
-
-bindsym $mod+Shift+x exec i3lock
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+# # Sreen brightness controls
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# Touchpad controls
-bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
+# # Touchpad controls
+# bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
 
-# Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# # Media player controls
+# bindsym XF86AudioPlay exec playerctl play
+# bindsym XF86AudioPause exec playerctl pause
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl previous
+
+# Enable touchpad tapping
+exec xinput set-prop 14 297 1
 
 exec gnome-terminal
 exec google-chrome
+
+# Wallpaper setting
+# FEH
 exec_always feh --bg-scale ~/walls/small-memory-lp.jpg
+# # exec_always --no-startup-id feh --bg-scale ~/Pictures/small-memory-lp.jpg
+# PYWAL
+# exec_always --no-startup-id wal -i /media/sf_Shared/Wallpapers/small-memory-lp.jpg -q
+
+# exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; exec gnome-terminal -e ranger'
+# exec --no-startup-id i3-msg 'workspace $workspace2; exec google-chrome'
+# exec --no-startup-id i3-msg 'workspace $workspace3; exec zathura'
+# exec --no-startup-id i3-msg 'workspace $workspace4; exec gnome-terminal -e cmus; exec gnome-terminal -e cava'
+
+bindsym Control+Shift+1 [class="^.*"] border toggle
+for_window [class="^.*"] border pixel 1
+
+# Compton
+exec_always --no-startup-id compton --config ~/.config/i3/compton.conf -b
+
+# # i3-gaps configuration
+# for_window [class="^.*"] border pixel 2
+
+# gaps inner 10
+# gaps outer 10
+
+# Polybar script
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+bindsym $mod+Shift+f exec exec gnome-terminal -e ranger
+bindsym $mod+Shift+b exec exec google-chrome
+bindsym $mod+Shift+v exec exec gnome-terminal -e vim
+
