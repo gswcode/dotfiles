@@ -115,11 +115,45 @@ alias ei="vim ~/.inputrc"
 alias e3="vim ~/.config/i3/config"
 alias p="python3"
 alias sz="source ~/.zshrc"
-alias myupdate="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y; sudo snap refresh"
-alias install="sudo apt install"
+alias pu="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y; sudo apt clean; sudo snap refresh"
+alias vu="vim -i NONE -c VundleUpdate -c quitall"
+alias in="sudo apt install"
 
 # zsh-history-substring-search
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # neofetch
+
+fzf_find_edit() {
+    local file=$(
+      fzf --no-multi --preview 'bat --color=always --line-range :500 {}'
+      )
+    if [ -n "$file" ]; then
+        if file --mime-type $file | grep -q pdf$; then
+            zathura $file &
+        elif file --mime-type $file | grep -q -E "jpg|png"$; then
+            feh -x $file &
+        else
+            vim $file
+        fi
+    fi
+}
+
+alias ffe='fzf_find_edit'
+
+fzf_rg_edit() {
+    if [ $# -eq 0 ]; then
+        echo 'Error: search term was not provided.'
+        return
+    fi
+    local match=$(rg --color=never --line-number "$1" | fzf --no-multi --delimiter : --preview "bat --color=always --line-range {2}: {1}")
+    local file=$(echo "$match" | cut -d':' -f1)
+    if [ -n "$file" ]; then
+        vim $file +$(echo "$match" | cut -d':' -f2)
+    fi
+}
+
+alias frge='fzf_rg_edit'
+
+export LS_COLORS="$(vivid generate molokai)"

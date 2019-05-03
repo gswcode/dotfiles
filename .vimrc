@@ -47,7 +47,6 @@ Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead 
 Plugin 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
 Plugin 'thiagoalessio/rainbow_levels.vim'       " text color based on indentation, default off, :RainbowToggle
 Plugin 'mileszs/ack.vim'                        " sudo apt-get install ack-grep; use Ack! {pattern} {directory}; check ag.vim also
-Plugin 'beloglazov/vim-online-thesaurus'        " search online thesaurus, use <leader>K
 Plugin 'vim-scripts/YankRing.vim'               " save the yanked data, use p <c-p>/<c-n>
 Plugin 'mhinz/vim-startify'                     " fancy start screen for vim
 Plugin 'matze/vim-move'                         " Highlight block then Alt+j/k, Currently only works in gvim
@@ -73,6 +72,7 @@ Plugin 'tyru/open-browser.vim'
 " Plugin 'chrisbra/NrrwRgn'                       " :NR :h NrrwRgn.txt
 " Plugin 'dominikduda/vim_current_word'           " :VimCurrentWordToggle
 " Plugin 'will133/vim-dirdiff'                    " diff recursively for directories
+" Plugin 'beloglazov/vim-online-thesaurus'        " search online thesaurus, use <leader>K
 " Plugin 'mihais/vim-mark'
 
 call vundle#end()            " required

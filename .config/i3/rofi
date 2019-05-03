@@ -31,7 +31,7 @@ rofi.location:                       0
 rofi.padding:                        20
 rofi.levenshtein-sort:               true
 rofi.case-sensitive:                 false
-rofi.fuzzy:                          false
+rofi.fuzzy:                          true
 rofi.line-margin:                    2
 rofi.separator-style:                solid
 rofi.hide-scrollbar:                 true

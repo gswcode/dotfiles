@@ -48,13 +48,13 @@ signal=10
 [memory]
 label=MEM
 separator=false
-interval=30
+interval=5
 
 [memory]
 label=SWAP
 instance=swap
 separator=false
-interval=30
+interval=5
 
 # Disk usage
 #
@@ -64,7 +64,7 @@ interval=30
 [disk]
 label=HOME
 #instance=/mnt/data
-interval=30
+interval=5
 
 # Network interface monitoring
 #
@@ -73,17 +73,17 @@ interval=30
 [iface]
 #instance=wlan0
 color=#00FF00
-interval=10
+interval=5
 separator=false
 
 [wifi]
 #instance=wlp3s0
-interval=10
+interval=1
 separator=false
 
 [bandwidth]
 #instance=eth0
-interval=5
+interval=1
 
 # CPU usage
 #
@@ -91,7 +91,7 @@ interval=5
 # see the script for details.
 [cpu_usage]
 label=CPU
-interval=10
+interval=1
 min_width=CPU: 100.00%
 #separator=false
 
