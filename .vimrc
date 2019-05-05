@@ -1,5 +1,15 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               _
+"              _   __ (_)____ ___   _____ _____
+"             | | / // // __ `__ \ / ___// ___/
+"             | |/ // // / / / / // /   / /__
+"             |___//_//_/ /_/ /_//_/    \___/
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
+
 set nocompatible
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -18,6 +28,7 @@ source ~/.vim/myfunctions/Always.vim
 
 call vundle#begin()
 
+" Active Plugins
 Plugin 'VundleVim/Vundle.vim'                   " PluginInstall/Clean/Update
 Plugin 'tpope/vim-commentary'                   " gc{motion}
 Plugin 'godlygeek/tabular'                      " :Tab /{delimiter}
@@ -63,6 +74,8 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-colorscheme-switcher'
 Plugin 'idbrii/textobj-word-column.vim'
 Plugin 'tyru/open-browser.vim'
+
+" Inactive Plugins
 " Plugin 'TaDaa/vimade'                           " Fade inactive buffers
 " Plugin 'RRethy/vim-illuminate'                  " highlights the word under the cursor
 " Plugin 'klassegeljakt/vim-stealth'              " :Stealth to hide/show comments, maps <leader>x to Stealth
@@ -201,11 +214,11 @@ nnoremap L $
 " To repeat last macro faster
 nnoremap Q @@
 
-" Disabling arrow keys in Vim
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
-" noremap <Left> <Nop>
-" noremap <Right> <Nop>
+" Remapping Ctrl + h/j/k/l to move in Insert Mode
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
 
 " Mapping arrow keys for navigating splits
 nnoremap <Up> <c-w>k
@@ -330,7 +343,7 @@ set autochdir
 " Stop vim from rerendering the screen after every step of the macro, only rerender at the end
 set lazyredraw
 
-" Directories for swp files
+" No backup's and swapfile's
 set nobackup
 set noswapfile
 
@@ -418,14 +431,6 @@ autocmd BufWritePre,FileWritePre ?* silent :call <SID>StripTrailingWhitespace()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Folding settings {{{
-
-""To save and load folds automatically
-"augroup filefolding
-"    autocmd!
-"    autocmd BufWinLeave ?* mkview
-"    autocmd BufWinEnter ?* silent loadview
-"    autocmd BufWinEnter ?* :normal zM
-"augroup END
 
 set foldclose=all      "close folds automatically when moving out of them
 augroup filetype_vim
@@ -546,20 +551,7 @@ autocmd BufWritePost,FileWritePost *.{c,cpp,v,py} execute "normal `a"
     " ctrl-w K 	move current window to top
     " ctrl-w L 	move current window to far right
 
-" Mapping w/q/a to their uppercase versions  --> will affect any other command line commands using similar pattern
-"command WQ wq
-"command Wq wq
-"command W w
-"command Q q
-
-" Mapping of ; for : --> will affect 'f/F/T/t' functionality
-"nnoremap ; :
-"nnoremap : ;
-"vnoremap ; :
-"vnoremap : ;
-
 " Searching tools
- " akdjf
 " q/ to see the search command window
 " /<CR> to repeat the last search
 " //e<CR> to repeat the last search but cursor at end of word
@@ -605,13 +597,24 @@ autocmd BufWritePost,FileWritePost *.{c,cpp,v,py} execute "normal `a"
 " au VimEnter ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " au VimLeave ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
-" Do something about the swap files
 " Read the help manual of Vim
 " Learn Vimscript the hard way
 
-" circular windows navigation , since tab=<C-i> it breaks <C-i> usage
-" nnoremap <Tab>   <c-W>w
-" nnoremap <S-Tab> <c-W>W
+" Force vim to always do global substitutions (no need to add g flag)
+" set gdefault
+
+" Do the following to substitute old with new only within a rectangular visual block, that being a
+" Control-v style visual selection:
+" :'<,'>s/\%Vold/new
+
+" Show the total number of search matching results and which one i am currently on
+
+" autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
+" autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
+" autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
+
+"For diffing open files run this command in all files
+"setlocal diff foldmethod=diff scrollbind nowrap foldlevel=1
 
 " }}}
 
@@ -630,31 +633,11 @@ set nrformats=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
-" autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
-" autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
-
-"For diffing open files run this command in all files
-"setlocal diff foldmethod=diff scrollbind nowrap foldlevel=1
-
 set virtualedit=all
 
-" Remove if not helpful
-" inoremap <C-j> <Down>
-" inoremap <C-k> <Up>
-" inoremap <C-l> <Right>
-" inoremap <C-h> <Left>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Force vim to always do global substitutions (no need to add g flag)
-" set gdefault
-" Do the following to substitute old with new only within a rectangular visual block, that being a
-" Control-v style visual selection:
-" :'<,'>s/\%Vold/new
-"
-" Show the total number of search matching results and which one i am currently on
-"
-
-" Multiply/Divide number under the cursor by count
+" Multiply/Divide number under the cursor by count provided
 function! Multivide(divide)
     let cnt = v:count1
     let old_reg = getreg("v")
@@ -673,6 +656,8 @@ endfunction
 nnoremap <F5> :<C-u>call Multivide(0)<CR>
 nnoremap <F6> :<C-u>call Multivide(1)<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
@@ -680,15 +665,20 @@ nmap <leader>l :set list!<CR>
 set showbreak=↪\
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
 set tabpagemax=50
-" set mousemodel=extend
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " To prevent conceal in LaTeX files
 let g:tex_conceal=''
 
 " To prevent conceal in any file
 set conceallevel=0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
