@@ -4,8 +4,6 @@ choices="ranger\nvim\nchrome\nblueman\npavucontrol"
 
 chosen=$(echo -e "$choices" | dmenu -i -p "Select application:")
 
-echo "$chosen"
-
 case "$chosen" in
     ranger )
         exec gnome-terminal -e ranger ;;
