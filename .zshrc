@@ -157,3 +157,5 @@ fzf_rg_edit() {
 alias frge='fzf_rg_edit'
 
 export LS_COLORS="$(vivid generate molokai)"
+
+alias myban="figlet -ckf slant"

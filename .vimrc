@@ -432,12 +432,13 @@ autocmd BufWritePre,FileWritePre ?* silent :call <SID>StripTrailingWhitespace()
 
 " Folding settings {{{
 
-set foldclose=all      "close folds automatically when moving out of them
+" set foldclose=all      "close folds automatically when moving out of them
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType cpp setlocal foldmethod=marker
     autocmd FileType verilog* setlocal foldmethod=marker
+    autocmd FileType sh setlocal foldmethod=marker
 augroup END
 
 " }}}
