@@ -215,10 +215,10 @@ nnoremap L $
 nnoremap Q @@
 
 " Remapping Ctrl + h/j/k/l to move in Insert Mode
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
+" inoremap <C-j> <Down>
+" inoremap <C-k> <Up>
+" inoremap <C-l> <Right>
+" inoremap <C-h> <Left>
 
 " Mapping arrow keys for navigating splits
 nnoremap <Up> <c-w>k
