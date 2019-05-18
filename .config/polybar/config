@@ -30,7 +30,7 @@ alert = #bd2c40
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 20
+height = 19
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -57,14 +57,14 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan temperature date powermenu
 
 tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
-;wm-restack = i3
+; wm-restack = bspwm
+; wm-restack = i3
 
 ; override-redirect = true
 ; enable-ipc = true
@@ -184,8 +184,9 @@ label-song-ellipsis = true
 [module/xbacklight]
 type = internal/xbacklight
 
+; format = <label> <bar>
 format = <label> <bar>
-label = BL
+label = BL %percentage%%
 
 bar-width = 10
 bar-indicator = |
