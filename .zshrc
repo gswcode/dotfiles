@@ -156,6 +156,11 @@ fzf_rg_edit() {
 
 alias frge='fzf_rg_edit'
 
-export LS_COLORS="$(vivid generate molokai)"
+# export LS_COLORS="$(vivid generate molokai)"
 
 alias myban="figlet -ckf slant"
+
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+( cat ~/.cache/wal/sequences & )

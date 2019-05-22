@@ -223,9 +223,9 @@ exec_always --no-startup-id xinput set-prop 14 276 1
 
 # Wallpaper setting
 # FEH
-exec_always --no-startup-id feh --bg-scale ~/walls/small-memory-lp.jpg
+# exec_always --no-startup-id feh --bg-scale ~/walls/small-memory-lp.jpg
 # PYWAL
-# exec_always --no-startup-id wal -i /media/sf_Shared/Wallpapers/small-memory-lp.jpg -q
+exec_always --no-startup-id wal --vte -q -i ~/walls
 
 exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; exec gnome-terminal -e ranger'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec google-chrome'
