@@ -1,3 +1,14 @@
+#============================================
+#
+#  ███████╗███████╗██╗  ██╗██████╗  ██████╗
+#  ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
+#    ███╔╝ ███████╗███████║██████╔╝██║
+#   ███╔╝  ╚════██║██╔══██║██╔══██╗██║
+#  ███████╗███████║██║  ██║██║  ██║╚██████╗
+#  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
+#
+#============================================
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -164,3 +175,16 @@ alias myban="figlet -ckf slant"
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 ( cat ~/.cache/wal/sequences & )
+
+function mkcd(){
+    mkdir $1
+    cd $1
+}
+
+function myenc(){
+    openssl enc -in $1 -aes-256-cbc -pass stdin -out $2
+}
+
+function mydec(){
+    openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
+}
