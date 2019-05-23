@@ -225,7 +225,7 @@ exec_always --no-startup-id xinput set-prop 14 276 1
 # FEH
 # exec_always --no-startup-id feh --bg-scale ~/walls/small-memory-lp.jpg
 # PYWAL
-exec_always --no-startup-id wal --vte -q -i ~/walls
+bindsym $mod+Shift+w exec --no-startup-id wal --vte -q -i ~/walls
 
 exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; exec gnome-terminal -e ranger'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec google-chrome'
