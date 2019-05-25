@@ -9,3 +9,5 @@
 	editor = /usr/bin/vim
 [merge]
 	tool = vimdiff
+[credential "https://github.com"]
+	username = gs1293
