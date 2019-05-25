@@ -9,6 +9,7 @@
 #
 #============================================
 
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -115,27 +116,67 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# USER ADDED ALIASES
+
 alias r="ranger"
+
 alias v="vim -O"
+
 alias vd="vimdiff"
+
 alias g="gvim -O"
+
 alias gd="gvimdiff"
+
 alias c="clear"
+
 alias eb="vim ~/.bash_aliases"
+
 alias ev="vim ~/.vimrc"
+
 alias ez="vim ~/.zshrc"
+
 alias ei="vim ~/.inputrc"
+
 alias e3="vim ~/.config/i3/config"
+
 alias p="python3"
+
 alias sb="source ~/.bashrc"
+
 alias sz="source ~/.zshrc"
+
 alias pu="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y; sudo apt clean; sudo snap refresh"
+
 alias vu="vim -i NONE -c VundleUpdate -c quitall"
+
 alias in="sudo apt install"
+
+alias myban="figlet -ckf slant"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# neofetch
+# export LS_COLORS="$(vivid generate molokai)"
+
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+( cat ~/.cache/wal/sequences & )
+
+# USER ADDED FUNCTIONS
+
+function mkcd(){
+    mkdir $1
+    cd $1
+}
+
+function myenc(){
+    openssl enc -in $1 -aes-256-cbc -pass stdin -out $2
+}
+
+function mydec(){
+    openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
+}
 
 fzf_find_edit() {
     local file=$(
@@ -167,25 +208,3 @@ fzf_rg_edit() {
 }
 
 alias frge='fzf_rg_edit'
-
-# export LS_COLORS="$(vivid generate molokai)"
-
-alias myban="figlet -ckf slant"
-
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-( cat ~/.cache/wal/sequences & )
-
-function mkcd(){
-    mkdir $1
-    cd $1
-}
-
-function myenc(){
-    openssl enc -in $1 -aes-256-cbc -pass stdin -out $2
-}
-
-function mydec(){
-    openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
-}

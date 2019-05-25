@@ -177,8 +177,12 @@ nnoremap <leader>c :CtrlPCmdPalette<cr>
 " `gf` command open file under cursor in a new vertical split
 nnoremap gf :vertical wincmd f<CR>
 
-"Mapping to open ~/.vimrc
+"Mappings to open dotfiles
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>eb :vsplit ~/.bash_aliases<cr>
+nnoremap <leader>ez :vsplit ~/.zshrc<cr>
+nnoremap <leader>e3 :vsplit ~/.config/i3/config<cr>
+nnoremap <leader>eg :vsplit ~/.gitconfig<cr>
 
 "Mapping to source ~/.vimrc
 nnoremap <leader>sv :source $MYVIMRC<cr> :noh<cr>

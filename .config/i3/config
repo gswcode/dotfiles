@@ -218,13 +218,7 @@ bindsym XF86AudioPrev exec playerctl previous
 exec_always --no-startup-id xinput set-prop 14 294 1
 exec_always --no-startup-id xinput set-prop 14 276 1
 
-# exec --no-startup-id gnome-terminal
-# exec --no-startup-id google-chrome
-
-# Wallpaper setting
-# FEH
-# exec_always --no-startup-id feh --bg-scale ~/walls/small-memory-lp.jpg
-# PYWAL
+# Wallpaper setting using PYWAL
 bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/pywal.sh
 exec --no-startup-id wal --vte -q -i ~/walls/pywal/
 
@@ -249,11 +243,4 @@ gaps outer 10
 # Polybar script
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# bindsym $mod+Shift+f exec gnome-terminal -e ranger
-# bindsym $mod+Shift+g exec google-chrome
-# bindsym $mod+Shift+v exec gnome-terminal -e vim
-# bindsym $mod+Shift+b exec blueman-manager
-# bindsym $mod+Shift+a exec pavucontrol
-
 bindsym $mod+p exec ~/.config/i3/programs.sh
-
