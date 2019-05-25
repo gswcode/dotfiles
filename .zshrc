@@ -188,3 +188,10 @@ function myenc(){
 function mydec(){
     openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
 }
+
+function mywall(){
+    wal --vte -q -i ~/walls/wallpapers/
+    rm -rf ~/walls/pywal
+    mkdir -p ~/walls/pywal
+    cp "$(< "${HOME}/.cache/wal/wal")" ~/walls/pywal/.
+}
