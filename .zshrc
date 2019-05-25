@@ -82,6 +82,8 @@ plugins=(
   history
 )
 
+# zsh-history-substring-search
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -125,12 +127,11 @@ alias ez="vim ~/.zshrc"
 alias ei="vim ~/.inputrc"
 alias e3="vim ~/.config/i3/config"
 alias p="python3"
+alias sb="source ~/.bashrc"
 alias sz="source ~/.zshrc"
 alias pu="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y; sudo apt clean; sudo snap refresh"
 alias vu="vim -i NONE -c VundleUpdate -c quitall"
 alias in="sudo apt install"
-
-# zsh-history-substring-search
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -187,11 +188,4 @@ function myenc(){
 
 function mydec(){
     openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
-}
-
-function mywall(){
-    wal --vte -q -i ~/walls/wallpapers/
-    rm -rf ~/walls/pywal
-    mkdir -p ~/walls/pywal
-    cp "$(< "${HOME}/.cache/wal/wal")" ~/walls/pywal/.
 }
