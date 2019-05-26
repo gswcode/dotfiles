@@ -1,12 +1,14 @@
 #!/bin/bash
 
+# Script to use dmenu for selecting most used programs
+
 choices="ranger\nvim\nchrome\nblueman\npavucontrol\nvimrc\nzshrc\ni3config\nxdman\nqbittorrent\ncmus\ncava"
 
 chosen=$(echo -e "$choices" | dmenu -i -p "Select application:")
 
 case "$chosen" in
     ranger )
-        exec gnome-terminal -e ranger ;;
+        exec gnome-terminal -e 'zsh -c "cat ~/.cache/wal/sequences; ranger; exec zsh"' ;;
     vim )
         exec gnome-terminal -e vim ;;
     chrome )

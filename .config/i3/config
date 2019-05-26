@@ -220,9 +220,9 @@ exec_always --no-startup-id xinput set-prop 14 276 1
 
 # Wallpaper setting using PYWAL
 bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/pywal.sh
-exec --no-startup-id wal --vte -q -i ~/walls/pywal/
+exec_always --no-startup-id wal --vte -q -i ~/walls/pywal/
 
-exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal; exec gnome-terminal -e ranger'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec gnome-terminal'
 exec --no-startup-id i3-msg 'workspace $workspace2; exec google-chrome'
 # exec --no-startup-id i3-msg 'workspace $workspace3; exec gnome-terminal -e cmus; exec gnome-terminal -e cava'
 # exec --no-startup-id i3-msg 'workspace $workspace4; exec zathura'
