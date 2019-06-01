@@ -700,21 +700,24 @@ nnoremap <leader>j :m+<cr>==
 xnoremap <leader>k :m-2<cr>gv=gv
 xnoremap <leader>j :m'>+<cr>gv=gv
 
-"move to the split in the direction shown, or create a new split
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
+""move to the split in the direction shown, or create a new split
+"nnoremap <silent> <C-h> :call WinMove('h')<cr>
+"nnoremap <silent> <C-j> :call WinMove('j')<cr>
+"nnoremap <silent> <C-k> :call WinMove('k')<cr>
+"nnoremap <silent> <C-l> :call WinMove('l')<cr>
 
-function! WinMove(key)
-  let t:curwin = winnr()
-  exec "wincmd ".a:key
-  if (t:curwin == winnr())
-    if (match(a:key,'[jk]'))
-      wincmd v
-    else
-      wincmd s
-    endif
-    exec "wincmd ".a:key
-  endif
-endfunction
+"function! WinMove(key)
+"  let t:curwin = winnr()
+"  exec "wincmd ".a:key
+"  if (t:curwin == winnr())
+"    if (match(a:key,'[jk]'))
+"      wincmd v
+"    else
+"      wincmd s
+"    endif
+"    exec "wincmd ".a:key
+"  endif
+"endfunction
+
+" Selecting your pasted text
+nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'

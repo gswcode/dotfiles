@@ -152,8 +152,6 @@ alias vu="vim -i NONE -c VundleUpdate -c quitall"
 
 alias in="sudo apt install"
 
-alias myban="figlet -ckf slant"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export LS_COLORS="$(vivid generate molokai)"
@@ -176,6 +174,10 @@ function myenc(){
 
 function mydec(){
     openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
+}
+
+function mybanner(){
+    figlet -cktf ANSI\ Shadow $* | lolcat
 }
 
 fzf_find_edit() {
