@@ -721,3 +721,15 @@ xnoremap <leader>j :m'>+<cr>gv=gv
 
 " Selecting your pasted text
 nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+" Toggle to ignore / not ignore whitespaces in vimdiff
+" if &diff
+"     map gs :call IwhiteToggle()<CR>
+"     function! IwhiteToggle()
+"       if &diffopt =~ 'iwhite'
+"         set diffopt-=iwhite
+"       else
+"         set diffopt+=iwhite
+"       endif
+"     endfunction
+" endif
