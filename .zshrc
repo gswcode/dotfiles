@@ -169,11 +169,11 @@ function mkcd(){
 }
 
 function myenc(){
-    openssl enc -in $1 -aes-256-cbc -pass stdin -out $2
+    openssl enc -aes-256-cbc -salt -pbkdf2 -in $1 -out $2
 }
 
 function mydec(){
-    openssl enc -in $1 -d -aes-256-cbc -pass stdin -out $2
+    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in $1 -out $2
 }
 
 function mybanner(){

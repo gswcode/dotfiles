@@ -513,7 +513,7 @@ autocmd BufNewFile *.{c,cpp,v,py} silent :0r ~/.vim/mysnippets/header
 autocmd BufNewFile *.{c,cpp,v,py} exe "1," . 8 . "g/File Name     :.*/s//File Name     : " .expand("%")
 autocmd BufNewFile *.{c,cpp,v,py} exe "1," . 8 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
 autocmd BufWritePre,FileWritePre *.{c,cpp,v,py} execute "normal ma"
-autocmd BufWritePre,FileWritePre *.{c,cpp,v,py} exe "1," . 8 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd BufWritePre,FileWritePre *.{c,cpp,v,py} exe "silent 1," . 8 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd BufWritePost,FileWritePost *.{c,cpp,v,py} execute "normal `a"
 " }}}
 
