@@ -60,7 +60,6 @@ Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead 
 Plugin 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
 Plugin 'thiagoalessio/rainbow_levels.vim'       " text color based on indentation, default off, :RainbowToggle
 Plugin 'mileszs/ack.vim'                        " sudo apt-get install ack-grep; use Ack! {pattern} {directory}; check ag.vim also
-Plugin 'vim-scripts/YankRing.vim'               " save the yanked data, use p <c-p>/<c-n>
 Plugin 'mhinz/vim-startify'                     " fancy start screen for vim
 Plugin 'matze/vim-move'                         " Highlight block then Alt+j/k, Currently only works in gvim
 Plugin 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
@@ -76,8 +75,9 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-colorscheme-switcher'
 Plugin 'idbrii/textobj-word-column.vim'
 Plugin 'tyru/open-browser.vim'
-
+Plugin 'tpope/vim-unimpaired'
 " Inactive Plugins
+" Plugin 'vim-scripts/YankRing.vim'               " save the yanked data, use p <c-p>/<c-n>
 " Plugin 'TaDaa/vimade'                           " Fade inactive buffers
 " Plugin 'RRethy/vim-illuminate'                  " highlights the word under the cursor
 " Plugin 'klassegeljakt/vim-stealth'              " :Stealth to hide/show comments, maps <leader>x to Stealth
@@ -227,10 +227,10 @@ nnoremap Q @@
 " inoremap <C-h> <Left>
 
 " Mapping arrow keys for navigating splits
-nnoremap <Up> <c-w>k
-nnoremap <Down> <c-w>j
-nnoremap <Left> <c-w>h
-nnoremap <Right> <c-w>l
+" nnoremap <Up> <c-w>k
+" nnoremap <Down> <c-w>j
+" nnoremap <Left> <c-w>h
+" nnoremap <Right> <c-w>l
 
 "Right align and Left align a visual block
 xnoremap <silent> <leader>ar :s/\v%V(\s*)(\S*)(\s*)/\1\3\2/<cr> :noh<cr>
@@ -354,7 +354,7 @@ set nobackup
 set noswapfile
 
 " Display vertical line at column 80
-set colorcolumn=80
+" set colorcolumn=80
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -699,6 +699,11 @@ nnoremap <leader>k :m-2<cr>==
 nnoremap <leader>j :m+<cr>==
 xnoremap <leader>k :m-2<cr>gv=gv
 xnoremap <leader>j :m'>+<cr>gv=gv
+
+nnoremap <leader>k :<C-u>execute 'normal dd' . v:count1 . 'kP'<cr>==
+nnoremap <leader>j :<C-u>execute 'normal dd' . v:count1 . 'jP'<cr>==
+xnoremap <leader>k :<C-u>execute "normal gvd".v:count1."kP=']"<CR>gv
+xnoremap <leader>j :<C-u>execute "normal gvd".v:count1."jP=']"<CR>gv
 
 ""move to the split in the direction shown, or create a new split
 "nnoremap <silent> <C-h> :call WinMove('h')<cr>
