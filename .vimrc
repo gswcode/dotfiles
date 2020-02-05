@@ -700,11 +700,6 @@ nnoremap <leader>j :m+<cr>==
 xnoremap <leader>k :m-2<cr>gv=gv
 xnoremap <leader>j :m'>+<cr>gv=gv
 
-nnoremap <leader>k :<C-u>execute 'normal dd' . v:count1 . 'kP'<cr>==
-nnoremap <leader>j :<C-u>execute 'normal dd' . v:count1 . 'jP'<cr>==
-xnoremap <leader>k :<C-u>execute "normal gvd".v:count1."kP=']"<CR>gv
-xnoremap <leader>j :<C-u>execute "normal gvd".v:count1."jP=']"<CR>gv
-
 ""move to the split in the direction shown, or create a new split
 "nnoremap <silent> <C-h> :call WinMove('h')<cr>
 "nnoremap <silent> <C-j> :call WinMove('j')<cr>
