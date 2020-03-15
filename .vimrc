@@ -21,7 +21,6 @@ set nocompatible
 filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.fzf
 
 " Functions list
 source ~/.vim/myfunctions/Block.vim
@@ -32,63 +31,92 @@ call vundle#begin()
 
 " Active Plugins
 Plugin 'VundleVim/Vundle.vim'                   " PluginInstall/Clean/Update
-Plugin 'tpope/vim-commentary'                   " gc{motion}
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'      " Automatically toggles number settings
 Plugin 'godlygeek/tabular'                      " :Tab /{delimiter}
-Plugin 'plasticboy/vim-markdown'
-Plugin 'junegunn/vim-easy-align'                " ga{motion}{delimiter} : use <C-x> to use any delimiter
-Plugin 'vim-syntastic/syntastic'                " :SyntasticCheck, :SyntasticInfo
+Plugin 'junegunn/vim-easy-align'                " ga{motion}{delimiter}, use <C-x> to use any delimiter
+Plugin 'junegunn/fzf.vim'
 Plugin 'ctrlpvim/ctrlp.vim'                     " use :CtrlP instead since YankRing uses <C-p>, check for different solution
 Plugin 'fisadev/vim-ctrlp-cmdpalette'           " use :CtrlPCmdPalette
-Plugin 'tpope/vim-surround'                     " cs{old identifier}{new identifier}
-Plugin 'flazz/vim-colorschemes'                 " :colorscheme <scheme>
+
+" Plugin 'preservim/nerdtree'                     " tree explorer plugin for vim
 Plugin 'tpope/vim-vinegar'                      " - , enhancing netrw
-Plugin 'raimondi/delimitmate'                   " automatically create bracket pairs in insert mode
-Plugin 'haya14busa/incsearch.vim'               " highlight all matching text while searching
-Plugin 'Yggdroot/indentLine'                    " creates dotted lines to show code indentation
-Plugin 'vim-scripts/VisIncr'                    " :I <increment>
-Plugin 'terryma/vim-multiple-cursors'           " <C-n> to select multiple cursors
+Plugin 'tpope/vim-commentary'                   " gc{motion}
+Plugin 'tpope/vim-surround'                     " cs{old identifier}{new identifier}
+Plugin 'tpope/vim-unimpaired'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-abolish'
+" Plugin 'tpope/vim-obsession'
+" Plugin 'tpope/vim-eunuch'
+" Plugin 'tpope/vim-sensible'
+" Plugin 'tpope/vim-scriptease'
+" Plugin 'tpope/vim-endwise'
+" Plugin 'tpope/vim-rsi'
+" Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-speeddating'
+
+" Plugin 'haya14busa/is.vim'
+Plugin 'haya14busa/incsearch.vim'               " Improved incremental searching for Vim
+Plugin 'haya14busa/incsearch-fuzzy.vim'         " incremental fuzzy search extension for incsearch.vim
+Plugin 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
+
 Plugin 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
+Plugin 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
+Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead of ;/, and t/T after t{char}
+Plugin 'terryma/vim-multiple-cursors'           " <C-n> to select multiple cursors
+Plugin 'tommcdo/vim-exchange'                   " cx{motion} Easy text exchange operator for Vim
+Plugin 'matze/vim-move'                         " Block move Ctrl+h/j/k/l, change redraw mapping
+
+Plugin 'mhinz/vim-startify'                     " fancy start screen for vim
+Plugin 'flazz/vim-colorschemes'                 " :colorscheme <scheme>
+Plugin 'Yggdroot/indentLine'                    " creates dotted lines to show code indentation
 Plugin 'luochen1990/rainbow'                    " Use different colors for nested parantheses
-Plugin 'cazador481/vim-systemverilog'           " verilog plugin
-Plugin 'vhda/verilog_systemverilog.vim'
-Plugin 'antoinemadec/vim-verilog-instance'      " gb{motion}
+Plugin 'thiagoalessio/rainbow_levels.vim'       " text color based on indentation, default off, :RainbowToggle
+Plugin 'junegunn/goyo.vim'                      " :Goyo, Distraction-free writing in Vim
+Plugin 'junegunn/limelight.vim'                 " :Limelight, Hyperfocus-writing in Vim
+
+Plugin 'raimondi/delimitmate'                   " automatically create bracket pairs in insert mode
+Plugin 'vim-scripts/VisIncr'                    " :I <increment>
 Plugin 'kana/vim-textobj-user'                  " use user defined text objects
 Plugin 'adriaanzon/vim-textobj-matchit'         " use am/im textobjects for matchit pairs
 Plugin 'troydm/zoomwintab.vim'                  " use <C-w><C-o> to zoom in/out current buffer
 Plugin 'simeji/winresizer'                      " <C-e> + h/j/k/l to resize window
-Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead of ;/, and t/T after t{char}
 Plugin 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
-Plugin 'thiagoalessio/rainbow_levels.vim'       " text color based on indentation, default off, :RainbowToggle
 Plugin 'mileszs/ack.vim'                        " sudo apt-get install ack-grep; use Ack! {pattern} {directory}; check ag.vim also
-Plugin 'mhinz/vim-startify'                     " fancy start screen for vim
-Plugin 'matze/vim-move'                         " Highlight block then Alt+j/k, Currently only works in gvim
-Plugin 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
-Plugin 'danro/rename.vim'                       " rename current file
-Plugin 'junegunn/goyo.vim'                      " :Goyo , Distraction-free writing in Vim
-Plugin 'junegunn/limelight.vim'                 " :Limelight, Hyperfocus-writing in Vim
-Plugin 'tommcdo/vim-exchange'                   " cx{motion} Easy text exchange operator for Vim
 Plugin 'francoiscabrol/ranger.vim'              " <leader>f opens ranger for file navigation
 Plugin 'lifepillar/vim-mucomplete'              " autocomplete plugin
-Plugin 'mboughaba/i3config.vim'
-Plugin 'arecarn/vim-crunch'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-colorscheme-switcher'
 Plugin 'idbrii/textobj-word-column.vim'
-Plugin 'tyru/open-browser.vim'
-Plugin 'tpope/vim-unimpaired'
-" Inactive Plugins
+Plugin 'tyru/open-browser.vim'                  " Open URL with your favorite browser from your most favorite editor
+Plugin 'machakann/vim-highlightedyank'          " Make the yanked region apparent!
+Plugin 'arecarn/vim-crunch'                     " Calculations inside Vim :Crunch, g={motion}
+
+" Plugin 'sjl/gundo.vim'
+" Plugin 'simnalamburt/vim-mundo'
+" Plugin 'mbbill/undotree'
+
+" Plugin 'justinmk/vim-sneak'
+" Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'wellle/targets.vim'
+" Plugin 'vimwiki/vimwiki'
+" Plugin 'andymass/vim-matchup'
+" Plugin 'michaeljsmith/vim-indent-object'
+" Plugin 'mhinz/vim-grepper'
+
 " Plugin 'vim-scripts/YankRing.vim'               " save the yanked data, use p <c-p>/<c-n>
-" Plugin 'TaDaa/vimade'                           " Fade inactive buffers
-" Plugin 'RRethy/vim-illuminate'                  " highlights the word under the cursor
-" Plugin 'klassegeljakt/vim-stealth'              " :Stealth to hide/show comments, maps <leader>x to Stealth
 " Plugin 'w0rp/ale'                               " Asynchronous line engine
 " Plugin 'SirVer/ultisnips'                       " setup properly then use
 " Plugin 'honza/vim-snippets'                     " setup properly then use
 " Plugin 'chrisbra/NrrwRgn'                       " :NR :h NrrwRgn.txt
 " Plugin 'dominikduda/vim_current_word'           " :VimCurrentWordToggle
 " Plugin 'will133/vim-dirdiff'                    " diff recursively for directories
-" Plugin 'beloglazov/vim-online-thesaurus'        " search online thesaurus, use <leader>K
-" Plugin 'mihais/vim-mark'
+
+" Language based plugins
+Plugin 'vim-syntastic/syntastic'                " Linter :SyntasticCheck, :SyntasticInfo
+Plugin 'plasticboy/vim-markdown'                " Syntax highlighting, matching rules and mappings for Markdown
+Plugin 'vhda/verilog_systemverilog.vim'         " Verilog/SystemVerilog Syntax and Omni-completion
+Plugin 'antoinemadec/vim-verilog-instance'      " create instantiation of ports from port declaration, gb{motion}
+Plugin 'mboughaba/i3config.vim'                 " Syntax highlighting for i3config
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -107,9 +135,24 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+"incsearch settings
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+"incsearch-fuzzy settings
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
+
+" :h g:incsearch#auto_nohlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)zz
+map N  <Plug>(incsearch-nohl-N)zz
+map *  <Plug>(incsearch-nohl-*)zz
+map #  <Plug>(incsearch-nohl-#)zz
+map g* <Plug>(incsearch-nohl-g*)zz
+map g# <Plug>(incsearch-nohl-g#)zz
 
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
@@ -149,6 +192,12 @@ set completeopt+=noinsert
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 let g:mucomplete#enable_auto_at_startup = 1
+
+let g:move_key_modifier = 'C'
+
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 
 " }}}
 
@@ -202,17 +251,6 @@ map <leader>< :Tab /<=/l1r1<cr>
 map <leader>( :Tab /(/l1r0<cr>
 map <leader>) :Tab /)/l0r0<cr>
 
-" Mapping Ctrl+L to remove highlighting and redraw the screen (default functionality)
-nnoremap <c-l> :nohl<cr><c-l>
-
-" Center the screen on the highlighted search result
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
 " To go to start/end of current line
 nnoremap H ^
 nnoremap L $
@@ -240,8 +278,13 @@ xnoremap <silent> <leader>al :s/\v%V(\s*)(\S*)(\s*)/\2\1\3/<cr> :noh<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ColorScheme Settings{{{
+" Source the vimrc file after saving it
+augroup vimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
 
+" ColorScheme Settings{{{
 augroup MyColors
     autocmd!
     autocmd ColorScheme * hi LineNr ctermbg=NONE guibg=NONE
@@ -315,12 +358,6 @@ set backspace=indent,eol,start
 
 " Manging line numbers
 set number relativenumber
-
-augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
 " Set color scheme that I like.
 if has("gui_running")
@@ -400,22 +437,22 @@ set statusline+=%{strftime(\"%l:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}    " Display ti
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 augroup WhitespaceMatch
-  " Remove ALL autocommands for the WhitespaceMatch group.
-  autocmd!
-  autocmd BufWinEnter * let w:whitespace_match_number =
-        \ matchadd('ExtraWhitespace', '\s\+$')
-  autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
-  autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+    " Remove ALL autocommands for the WhitespaceMatch group.
+    autocmd!
+    autocmd BufWinEnter * let w:whitespace_match_number =
+                \ matchadd('ExtraWhitespace', '\s\+$')
+    autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
+    autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
 augroup END
 function! s:ToggleWhitespaceMatch(mode)
-  let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
-  if exists('w:whitespace_match_number')
-    call matchdelete(w:whitespace_match_number)
-    call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
-  else
-    " Something went wrong, try to be graceful.
-    let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
-  endif
+    let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
+    if exists('w:whitespace_match_number')
+        call matchdelete(w:whitespace_match_number)
+        call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
+    else
+        " Something went wrong, try to be graceful.
+        let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
+    endif
 endfunction
 
 function! <SID>StripTrailingWhitespace()
@@ -519,114 +556,6 @@ autocmd BufWritePost,FileWritePost *.{c,cpp,v,py} execute "normal `a"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" User defined persistent macros
-"let @a='4j6dd'
-
-"CHEATSHEETS for learning : {{{
-
-" 1. Working with windows
-
-    " ctrl-w s 	            split the current window horizontally, loading the same file in the new window
-    " ctrl-w v 	            split the current window vertically, loading the same file in the new window
-
-    " :sp[lit] filename 	split the current window horizontally, loading filename in the new window
-    " :vsp[lit] filename 	split the current window vertically, loading filename in the new window
-
-    " :q[uit] 	            close the currently active window
-    " :on[ly] 	            close all windows except the currently active window
-
-    " ctrl-w w 	            cycle between the open windows
-    " ctrl-w h 	            focus the window to the left
-    " ctrl-w j 	            focus the window to the down
-    " ctrl-w k 	            focus the window to the up
-    " ctrl-w l 	            focus the window to the right
-
-    " map <C-h> <C-w>h
-    " map <C-j> <C-w>j
-    " map <C-k> <C-w>k
-    " map <C-l> <C-w>l
-
-    " ctrl-w + 	increase height of current window by 1 line
-    " ctrl-w - 	decrease height of current window by 1 line
-    " ctrl-w _ 	maximise height of current window
-    " ctrl-w | 	maximise width of current window
-
-    " ctrl-w r 	rotate all windows
-    " ctrl-w x 	exchange current window with its neighbour
-    " ctrl-w H 	move current window to far left
-    " ctrl-w J 	move current window to bottom
-    " ctrl-w K 	move current window to top
-    " ctrl-w L 	move current window to far right
-
-" Searching tools
-" q/ to see the search command window
-" /<CR> to repeat the last search
-" //e<CR> to repeat the last search but cursor at end of word
-" leaving the first argument of substitute command means to use the previous search by default
-" use () to wrap your search to save it into numbered registers \1
-" \v for very magic search    all special meaning by default
-" \V for very non magic search    no special meaning by default, will match literal characters if not backslashed
-" <Ctrl-R>/ in command line inserts the last pattern searched
-" <Ctrl-R>{register} in command line inserts the pattern saved in the register
-" ctrl-r + ctrl-w to fill out the search pattern for both under the cursor or highlighted search
-
-" Substitution tools
-" use gcn flag for search and replace, g-global in line, c-confirmation, e - suppress errors
-" use n to find out the total number of occurences of the search pattern in the file
-" :%s///n to find the number of occurences for the pattern in previous search
-" :%s//\=@0/g use as \=@{register} for pass by reference, rather than inserting all of it's contents in the command line.:w
-" :%s//\=@a/g -> set search pattern using:  let @/='' and yank the replacement string in "a" register
-" :%s//~/&    can change the range and use the previous search pattern, ~  replacement string and flags
-" g&      to do the previous substitute command on the entire file
-" :%&&    same as g&
-" :&&     apply previous substitute command on the current line
-" :'<,'>&&    apply previous substitute command on the visual selection(use gv)
-
-" :%s///gn count the number of previous search pattern
-
-" nnoremap & :&&<CR>
-" xnoremap & :&&<CR>
-
-" Extra helpful commands
-" @: to repeat the last ex command
-" q: to see the command window
-" c{motion}{text}<Ctrl-R>"{text}<CR>  to add some text around some other text
-" use the expression register to insert values using calculation i<Ctrl-R>=expression<CR>
-" use @= to calculate expression and see the output in command line and use the value for normal mode commands
-" lookahead and lookbefore search patterns \zs \ze
-" q{register}q    to empty a register value
-" inserting a pattern of numbers to your code using a macro (or using range)
-" use mV to mark vimrc and mB to mark bash_aliases
-
-" Create mapping for CAPS-LOCK to be used as escape key
-" au VimEnter ?* :silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-" au VimLeave ?* :silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
-" au VimEnter ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-" au VimLeave ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
-
-" Read the help manual of Vim
-" Learn Vimscript the hard way
-
-" Force vim to always do global substitutions (no need to add g flag)
-" set gdefault
-
-" Do the following to substitute old with new only within a rectangular visual block, that being a
-" Control-v style visual selection:
-" :'<,'>s/\%Vold/new
-
-" Show the total number of search matching results and which one i am currently on
-
-" autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
-" autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
-" autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
-
-"For diffing open files run this command in all files
-"setlocal diff foldmethod=diff scrollbind nowrap foldlevel=1
-
-" }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Saves the undo history, even after file is closed
 let s:undoDir = "/tmp/.undodir_" . $USER
 if !isdirectory(s:undoDir)
@@ -638,13 +567,11 @@ set undofile
 " CTRL-A/X will be forced to use decimal-based arithmetic
 set nrformats=
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set virtualedit=all
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Multiply/Divide number under the cursor by count provided
+" Multiply/Divide number under the cursor by count provided {{{
 function! Multivide(divide)
     let cnt = v:count1
     let old_reg = getreg("v")
@@ -663,6 +590,8 @@ endfunction
 nnoremap <F5> :<C-u>call Multivide(0)<CR>
 nnoremap <F6> :<C-u>call Multivide(1)<CR>
 
+" }}}
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Shortcut to rapidly toggle `set list`
@@ -674,13 +603,7 @@ set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-
 set tabpagemax=50
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " To prevent conceal in LaTeX files
 let g:tex_conceal=''
@@ -692,32 +615,6 @@ set conceallevel=0
 
 "replace the word under cursor
 nnoremap <leader>* :%s/<c-r><c-w>//<left>
-" nnoremap <leader>* :%s/\<<c-r><c-w>\>//<left>
-
-"move lines around
-nnoremap <leader>k :m-2<cr>==
-nnoremap <leader>j :m+<cr>==
-xnoremap <leader>k :m-2<cr>gv=gv
-xnoremap <leader>j :m'>+<cr>gv=gv
-
-""move to the split in the direction shown, or create a new split
-"nnoremap <silent> <C-h> :call WinMove('h')<cr>
-"nnoremap <silent> <C-j> :call WinMove('j')<cr>
-"nnoremap <silent> <C-k> :call WinMove('k')<cr>
-"nnoremap <silent> <C-l> :call WinMove('l')<cr>
-
-"function! WinMove(key)
-"  let t:curwin = winnr()
-"  exec "wincmd ".a:key
-"  if (t:curwin == winnr())
-"    if (match(a:key,'[jk]'))
-"      wincmd v
-"    else
-"      wincmd s
-"    endif
-"    exec "wincmd ".a:key
-"  endif
-"endfunction
 
 " Selecting your pasted text
 nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -733,3 +630,20 @@ nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'
 "       endif
 "     endfunction
 " endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Create mapping for CAPS-LOCK to be used as escape key
+" au VimEnter ?* :silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+" au VimLeave ?* :silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+" au VimEnter ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+" au VimLeave ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
+" Do the following to substitute old with new only within a rectangular visual block, that being a
+" Control-v style visual selection:
+" :'<,'>s/\%Vold/new
+
+" autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
+" autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
+" autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
+
