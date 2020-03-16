@@ -58,8 +58,8 @@ Plugin 'glts/vim-radical'                       " Convert decimal, hex, octal, b
 Plugin 'glts/vim-magnum'                        " Pure Vim script big integer library
 
 Plugin 'haya14busa/is.vim'                      " incremental search improved
-" Plugin 'osyo-manga/vim-anzu'                    " display search position like (2/10) for n/N commands
-" Plugin 'haya14busa/vim-asterisk'                " asterisk.vim provides improved * motions
+Plugin 'osyo-manga/vim-anzu'                    " display search position like (2/10) for n/N commands
+Plugin 'haya14busa/vim-asterisk'                " asterisk.vim provides improved * motions
 Plugin 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
 
 Plugin 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
@@ -182,6 +182,14 @@ let g:move_key_modifier = 'C'
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+
+map n <Plug>(is-nohl)<Plug>(anzu-n-with-echo)
+map N <Plug>(is-nohl)<Plug>(anzu-N-with-echo)
+map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
+map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
+map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
+map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
+let g:asterisk#keeppos = 1
 
 " }}}
 
@@ -473,14 +481,14 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Searching the visually selected text using * or # from visual mode directly {{{
-xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
-function! s:VSetSearch()
-    let temp = @s
-    norm! gv"sy
-    let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-    let @s = temp
-endfunction
+" xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+" xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+" function! s:VSetSearch()
+"     let temp = @s
+"     norm! gv"sy
+"     let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+"     let @s = temp
+" endfunction
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
