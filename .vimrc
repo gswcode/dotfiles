@@ -38,25 +38,28 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'ctrlpvim/ctrlp.vim'                     " use :CtrlP instead since YankRing uses <C-p>, check for different solution
 Plugin 'fisadev/vim-ctrlp-cmdpalette'           " use :CtrlPCmdPalette
 
-" Plugin 'preservim/nerdtree'                     " tree explorer plugin for vim
+Plugin 'preservim/nerdtree'                     " tree explorer plugin for vim
 Plugin 'tpope/vim-vinegar'                      " - , enhancing netrw
 Plugin 'tpope/vim-commentary'                   " gc{motion}
 Plugin 'tpope/vim-surround'                     " cs{old identifier}{new identifier}
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-rsi'
 " Plugin 'tpope/vim-fugitive'
-" Plugin 'tpope/vim-abolish'
 " Plugin 'tpope/vim-obsession'
-" Plugin 'tpope/vim-eunuch'
 " Plugin 'tpope/vim-sensible'
 " Plugin 'tpope/vim-scriptease'
-" Plugin 'tpope/vim-endwise'
-" Plugin 'tpope/vim-rsi'
-" Plugin 'tpope/vim-repeat'
-" Plugin 'tpope/vim-speeddating'
 
-" Plugin 'haya14busa/is.vim'
-Plugin 'haya14busa/incsearch.vim'               " Improved incremental searching for Vim
-Plugin 'haya14busa/incsearch-fuzzy.vim'         " incremental fuzzy search extension for incsearch.vim
+Plugin 'glts/vim-radical'                       " Convert decimal, hex, octal, binary number representations
+Plugin 'glts/vim-magnum'                        " Pure Vim script big integer library
+
+Plugin 'haya14busa/is.vim'                      " incremental search improved
+" Plugin 'osyo-manga/vim-anzu'                    " display search position like (2/10) for n/N commands
+" Plugin 'haya14busa/vim-asterisk'                " asterisk.vim provides improved * motions
 Plugin 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
 
 Plugin 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
@@ -134,25 +137,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-"incsearch settings
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-"incsearch-fuzzy settings
-map z/ <Plug>(incsearch-fuzzy-/)
-map z? <Plug>(incsearch-fuzzy-?)
-map zg/ <Plug>(incsearch-fuzzy-stay)
-
-" :h g:incsearch#auto_nohlsearch
-let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)zz
-map N  <Plug>(incsearch-nohl-N)zz
-map *  <Plug>(incsearch-nohl-*)zz
-map #  <Plug>(incsearch-nohl-#)zz
-map g* <Plug>(incsearch-nohl-g*)zz
-map g# <Plug>(incsearch-nohl-g#)zz
 
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
@@ -646,4 +630,3 @@ nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'
 " autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
 " autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
 " autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
-
