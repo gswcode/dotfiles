@@ -1,5 +1,4 @@
-"===========================================
-"
+"=========================================== "
 "  ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
 "  ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
 "  ██║   ██║██║██╔████╔██║██████╔╝██║
@@ -63,6 +62,7 @@ Plugin 'haya14busa/vim-asterisk'                " asterisk.vim provides improved
 Plugin 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
 
 Plugin 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
+Plugin 'justinmk/vim-sneak'                     " Jump to any location specified by two characters, remaps s,S
 Plugin 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
 Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead of ;/, and t/T after t{char}
 Plugin 'terryma/vim-multiple-cursors'           " <C-n> to select multiple cursors
@@ -77,13 +77,17 @@ Plugin 'thiagoalessio/rainbow_levels.vim'       " text color based on indentatio
 Plugin 'junegunn/goyo.vim'                      " :Goyo, Distraction-free writing in Vim
 Plugin 'junegunn/limelight.vim'                 " :Limelight, Hyperfocus-writing in Vim
 
+Plugin 'kana/vim-textobj-user'                  " use user defined text objects
+Plugin 'wellle/targets.vim'                     " Vim plugin that provides additional text objects
+Plugin 'andymass/vim-matchup'                   " even better % navigate and highlight matching words, modern matchit and matchparen replacement
+Plugin 'adriaanzon/vim-textobj-matchit'         " use am/im textobjects for matchit pairs
+Plugin 'michaeljsmith/vim-indent-object'        " defines a new text object representing lines of code at the same indent level
+Plugin 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
+
 Plugin 'raimondi/delimitmate'                   " automatically create bracket pairs in insert mode
 Plugin 'vim-scripts/VisIncr'                    " :I <increment>
-Plugin 'kana/vim-textobj-user'                  " use user defined text objects
-Plugin 'adriaanzon/vim-textobj-matchit'         " use am/im textobjects for matchit pairs
 Plugin 'troydm/zoomwintab.vim'                  " use <C-w><C-o> to zoom in/out current buffer
 Plugin 'simeji/winresizer'                      " <C-e> + h/j/k/l to resize window
-Plugin 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
 Plugin 'mileszs/ack.vim'                        " sudo apt-get install ack-grep; use Ack! {pattern} {directory}; check ag.vim also
 Plugin 'francoiscabrol/ranger.vim'              " <leader>f opens ranger for file navigation
 Plugin 'lifepillar/vim-mucomplete'              " autocomplete plugin
@@ -98,21 +102,13 @@ Plugin 'arecarn/vim-crunch'                     " Calculations inside Vim :Crunc
 " Plugin 'simnalamburt/vim-mundo'
 " Plugin 'mbbill/undotree'
 
-" Plugin 'justinmk/vim-sneak'
-" Plugin 'dhruvasagar/vim-table-mode'
-" Plugin 'wellle/targets.vim'
+Plugin 'dhruvasagar/vim-table-mode'             " VIM Table Mode for instant table creation
+Plugin 'mhinz/vim-grepper'                      " Helps you win at grep
 " Plugin 'vimwiki/vimwiki'
-" Plugin 'andymass/vim-matchup'
-" Plugin 'michaeljsmith/vim-indent-object'
-" Plugin 'mhinz/vim-grepper'
 
-" Plugin 'vim-scripts/YankRing.vim'               " save the yanked data, use p <c-p>/<c-n>
 " Plugin 'w0rp/ale'                               " Asynchronous line engine
 " Plugin 'SirVer/ultisnips'                       " setup properly then use
 " Plugin 'honza/vim-snippets'                     " setup properly then use
-" Plugin 'chrisbra/NrrwRgn'                       " :NR :h NrrwRgn.txt
-" Plugin 'dominikduda/vim_current_word'           " :VimCurrentWordToggle
-" Plugin 'will133/vim-dirdiff'                    " diff recursively for directories
 
 " Language based plugins
 Plugin 'vim-syntastic/syntastic'                " Linter :SyntasticCheck, :SyntasticInfo
@@ -202,8 +198,8 @@ map <space> <leader>
 map <space><space> <leader><leader>
 
 " To stop pressing shift for getting :
-nnoremap ; :
-vnoremap ; :
+" nnoremap ; :
+" vnoremap ; :
 
 " Do not go to insert mode when creating a new line
 nnoremap o o<esc>
@@ -270,18 +266,18 @@ xnoremap <silent> <leader>al :s/\v%V(\s*)(\S*)(\s*)/\2\1\3/<cr> :noh<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Source the vimrc file after saving it
+" Source the vimrc file after saving it {{{
 augroup vimrc
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
+" }}}
 
 " ColorScheme Settings{{{
 augroup MyColors
     autocmd!
     autocmd ColorScheme * hi LineNr ctermbg=NONE guibg=NONE
 augroup END
-
 "}}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -476,19 +472,6 @@ augroup filetype_vim
     autocmd FileType sh setlocal foldmethod=marker
 augroup END
 
-" }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Searching the visually selected text using * or # from visual mode directly {{{
-" xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
-" xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
-" function! s:VSetSearch()
-"     let temp = @s
-"     norm! gv"sy
-"     let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-"     let @s = temp
-" endfunction
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
