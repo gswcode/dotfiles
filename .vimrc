@@ -31,6 +31,7 @@ call vundle#begin()
 " Active Plugins
 Plugin 'VundleVim/Vundle.vim'                   " PluginInstall/Clean/Update
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'      " Automatically toggles number settings
+Plugin 'vim-airline/vim-airline'                " lean & mean status/tabline for vim that's light as air
 Plugin 'godlygeek/tabular'                      " :Tab /{delimiter}
 Plugin 'junegunn/vim-easy-align'                " ga{motion}{delimiter}, use <C-x> to use any delimiter
 Plugin 'junegunn/fzf.vim'
@@ -48,7 +49,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rsi'
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Plugin 'tpope/vim-obsession'
 " Plugin 'tpope/vim-sensible'
 " Plugin 'tpope/vim-scriptease'
@@ -186,6 +187,8 @@ map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
 map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 let g:asterisk#keeppos = 1
+
+let g:airline_powerline_fonts = 1
 
 " }}}
 
@@ -380,43 +383,6 @@ set noswapfile
 
 " Display vertical line at column 80
 " set colorcolumn=80
-" }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Statusline settings {{{
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0
-  elseif a:mode == 'r'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-  else
-    hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
-
-" default the statusline to green when entering Vim
-hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
-
-" Formats the statusline
-set statusline=%f                               " file name
-set statusline+=[%{strlen(&fenc)?&fenc:'none'}, " file encoding
-set statusline+=%{&ff}]                         " file format
-set statusline+=%y                              " filetype
-set statusline+=%h                              " help file flag
-set statusline+=%m                              " modified flag
-set statusline+=%r                              " read only flag
-
-set statusline+=\ %=                                                " align left
-set statusline+=Line:%l/%L[%p%%]                                    " line X of Y [percent of file]
-set statusline+=\ Col:%c                                            " current column
-set statusline+=\ Buf:%n                                            " Buffer number
-set statusline+=\ [%b][0x%B]\                                       " ASCII and byte code under cursor
-set statusline+=%{strftime(\"%l:%M:%S\ \%p,\ %a\ %b\ %d,\ %Y\")}    " Display time and date
-
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
