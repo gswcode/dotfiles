@@ -1,4 +1,5 @@
-"=========================================== "
+"===========================================
+"
 "  ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
 "  ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
 "  ██║   ██║██║██╔████╔██║██████╔╝██║
@@ -20,11 +21,6 @@ set nocompatible
 filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
-
-" Functions list
-source ~/.vim/myfunctions/Block.vim
-source ~/.vim/myfunctions/Pipeline.vim
-source ~/.vim/myfunctions/Always.vim
 
 call vundle#begin()
 
@@ -103,7 +99,6 @@ Plugin 'arecarn/vim-crunch'                     " Calculations inside Vim :Crunc
 " Plugin 'simnalamburt/vim-mundo'
 " Plugin 'mbbill/undotree'
 
-Plugin 'dhruvasagar/vim-table-mode'             " VIM Table Mode for instant table creation
 Plugin 'mhinz/vim-grepper'                      " Helps you win at grep
 " Plugin 'vimwiki/vimwiki'
 
@@ -117,6 +112,9 @@ Plugin 'plasticboy/vim-markdown'                " Syntax highlighting, matching 
 Plugin 'vhda/verilog_systemverilog.vim'         " Verilog/SystemVerilog Syntax and Omni-completion
 Plugin 'antoinemadec/vim-verilog-instance'      " create instantiation of ports from port declaration, gb{motion}
 Plugin 'mboughaba/i3config.vim'                 " Syntax highlighting for i3config
+
+" Enable only when needed
+" Plugin 'dhruvasagar/vim-table-mode'             " VIM Table Mode for instant table creation
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -200,9 +198,6 @@ let g:airline_powerline_fonts = 1
 map <space> <leader>
 map <space><space> <leader><leader>
 
-" To stop pressing shift for getting :
-" nnoremap ; :
-" vnoremap ; :
 
 " Do not go to insert mode when creating a new line
 nnoremap o o<esc>
@@ -235,12 +230,12 @@ nnoremap <leader>x :x<cr>
 " nnoremap <leader>f <c-w>v:Startify<cr>
 
 " For verilog code indentation
-map <leader>, :Tab /,/l0r1<cr>
-map <leader>; :Tab /;/l0r1<cr>
-map <leader>= :Tab / = /l0r0<cr>
-map <leader>< :Tab /<=/l1r1<cr>
-map <leader>( :Tab /(/l1r0<cr>
-map <leader>) :Tab /)/l0r0<cr>
+map <leader>, :Tabularize /,/l0r1<cr>
+map <leader>; :Tabularize /;/l0r1<cr>
+map <leader>= :Tabularize / = /l0r0<cr>
+map <leader>< :Tabularize /<=/l1r1<cr>
+map <leader>( :Tabularize /(/l1r0<cr>
+map <leader>) :Tabularize /)/l0r0<cr>
 
 " To go to start/end of current line
 nnoremap H ^
@@ -249,18 +244,6 @@ nnoremap L $
 " To repeat last macro faster
 nnoremap Q @@
 
-" Remapping Ctrl + h/j/k/l to move in Insert Mode
-" inoremap <C-j> <Down>
-" inoremap <C-k> <Up>
-" inoremap <C-l> <Right>
-" inoremap <C-h> <Left>
-
-" Mapping arrow keys for navigating splits
-" nnoremap <Up> <c-w>k
-" nnoremap <Down> <c-w>j
-" nnoremap <Left> <c-w>h
-" nnoremap <Right> <c-w>l
-
 "Right align and Left align a visual block
 xnoremap <silent> <leader>ar :s/\v%V(\s*)(\S*)(\s*)/\1\3\2/<cr> :noh<cr>
 xnoremap <silent> <leader>al :s/\v%V(\s*)(\S*)(\s*)/\2\1\3/<cr> :noh<cr>
@@ -268,13 +251,6 @@ xnoremap <silent> <leader>al :s/\v%V(\s*)(\S*)(\s*)/\2\1\3/<cr> :noh<cr>
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Source the vimrc file after saving it {{{
-augroup vimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-" }}}
 
 " ColorScheme Settings{{{
 augroup MyColors
@@ -290,6 +266,9 @@ augroup END
 " Always show status line
 set laststatus=2
 
+" Hide the default mode text (e.g. -- INSERT -- below the statusline)
+set noshowmode
+
 " Enable the use of mouse
 set mouse+=a
 
@@ -302,22 +281,16 @@ syntax on
 " Automatically indent when adding a curly bracket, etc.
 set smartindent
 
-" Number of spaces inserted when <TAB> is pressed
-set tabstop=8
+set tabstop=8     " Number of spaces inserted when <TAB> is pressed
 set softtabstop=4
-" Number of spaces used in Auto indentation
-set shiftwidth=4
-" <TAB>'s are converted to spaces
-set expandtab
+set shiftwidth=4  " Number of spaces used in Auto indentation
+set expandtab     " <TAB>'s are converted to spaces
 
 " Show line number and cursor position
 set ruler
 
 " Display normal mode commands as you type
 set showcmd
-
-" Show editing mode
-set showmode
 
 " Show file options above the command line
 set wildmenu
@@ -327,12 +300,11 @@ set wildignorecase
 set cursorline
 "set cursorcolumn
 
-" Break lines so that words are not broken halfway, when using set wrap
-"set wrap
-"set linebreak
-
 " Don't wrap lines by default
 set nowrap
+
+" Break lines so that words are not broken halfway, when using set wrap
+set linebreak
 
 " Open vertical split on the right side of the current window
 set splitbelow
@@ -442,48 +414,6 @@ augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Leaving insert mode in terminal vim {{{
-" Fix for faster visual block mode in terminal vim
-" When you’re pressing Escape to leave insert mode in the terminal, it will by
-" default take a second or another keystroke to leave insert mode completely
-" and update the statusline. This fixes that. I got this from:
-" https://powerline.readthedocs.org/en/latest/tipstricks.html#vim
-set timeout " Do time out on mappings and others
-set timeoutlen=2000 " Wait {num} ms before timing out a mapping
-
-if !has('gui_running')
-    set ttimeoutlen=10
-    augroup FastEscape
-        autocmd!
-        autocmd InsertEnter * set timeoutlen=0
-        autocmd InsertLeave * set timeoutlen=1000
-    augroup END
-endif
-" }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" RTL snippets : use :z<TAB> {{{
-
-command! Zalways    :-1r ~/.vim/mysnippets/always
-command! Zdivider   :-1r ~/.vim/mysnippets/divider
-command! Zmodule    :-1r ~/.vim/mysnippets/module
-command! Zrow       :-1r ~/.vim/mysnippets/row
-command! Zcolumn    :-1r ~/.vim/mysnippets/column
-command! Zpipeline  :-1r ~/.vim/mysnippets/pipeline
-command! Zpipeline2 :-1r ~/.vim/mysnippets/pipeline2
-command! Zcomment   :-1r ~/.vim/mysnippets/comment
-command! Zcase      :-1r ~/.vim/mysnippets/case
-command! Zmem       :-1r ~/.vim/mysnippets/mem
-command! Zdelay     :-1r ~/.vim/mysnippets/delay
-command! Zminmax    :-1r ~/.vim/mysnippets/minmax
-command! Zsram      :-1r ~/.vim/mysnippets/sram
-command! Zcpp       :-1r ~/.vim/mysnippets/cpp
-
-" }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "Automatic Banner/Header genration {{{
 "Fix it to be more generic and autonomous
 "Fix issue of cursor moving to date line when saving after sourcing vimrc
@@ -535,12 +465,16 @@ nnoremap <F6> :<C-u>call Multivide(1)<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Listchar settings {{{
+
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set showbreak=↪\
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
+" }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -560,19 +494,33 @@ nnoremap <leader>* :%s/<c-r><c-w>//<left>
 " Selecting your pasted text
 nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-" Toggle to ignore / not ignore whitespaces in vimdiff
-" if &diff
-"     map gs :call IwhiteToggle()<CR>
-"     function! IwhiteToggle()
-"       if &diffopt =~ 'iwhite'
-"         set diffopt-=iwhite
-"       else
-"         set diffopt+=iwhite
-"       endif
-"     endfunction
-" endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Verilog related settings {{{
+
+" Functions list
+source ~/.vim/myfunctions/Block.vim
+source ~/.vim/myfunctions/Pipeline.vim
+source ~/.vim/myfunctions/Always.vim
+
+" RTL snippets : use :z<TAB>
+
+command! Zalways    :-1r ~/.vim/mysnippets/always
+command! Zdivider   :-1r ~/.vim/mysnippets/divider
+command! Zmodule    :-1r ~/.vim/mysnippets/module
+command! Zrow       :-1r ~/.vim/mysnippets/row
+command! Zcolumn    :-1r ~/.vim/mysnippets/column
+command! Zpipeline  :-1r ~/.vim/mysnippets/pipeline
+command! Zpipeline2 :-1r ~/.vim/mysnippets/pipeline2
+command! Zcomment   :-1r ~/.vim/mysnippets/comment
+command! Zcase      :-1r ~/.vim/mysnippets/case
+command! Zmem       :-1r ~/.vim/mysnippets/mem
+command! Zdelay     :-1r ~/.vim/mysnippets/delay
+command! Zminmax    :-1r ~/.vim/mysnippets/minmax
+command! Zsram      :-1r ~/.vim/mysnippets/sram
+command! Zcpp       :-1r ~/.vim/mysnippets/cpp
+
+" }}}
 
 " Create mapping for CAPS-LOCK to be used as escape key
 " au VimEnter ?* :silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
@@ -587,3 +535,16 @@ nnoremap <expr> gs '`[' . strpart(getregtype(), 0, 1) . '`]'
 " autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
 " autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
 " autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
+
+" Toggle to ignore / not ignore whitespaces in vimdiff
+" if &diff
+"     map gs :call IwhiteToggle()<CR>
+"     function! IwhiteToggle()
+"       if &diffopt =~ 'iwhite'
+"         set diffopt-=iwhite
+"       else
+"         set diffopt+=iwhite
+"       endif
+"     endfunction
+" endif
+
