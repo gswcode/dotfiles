@@ -59,7 +59,7 @@ Plugin 'haya14busa/vim-asterisk'                " asterisk.vim provides improved
 Plugin 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
 
 Plugin 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
-Plugin 'justinmk/vim-sneak'                     " Jump to any location specified by two characters, remaps s,S
+" Plugin 'justinmk/vim-sneak'                     " Jump to any location specified by two characters, remaps s,S
 Plugin 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
 Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead of ;/, and t/T after t{char}
 Plugin 'terryma/vim-multiple-cursors'           " <C-n> to select multiple cursors
@@ -95,10 +95,7 @@ Plugin 'tyru/open-browser.vim'                  " Open URL with your favorite br
 Plugin 'machakann/vim-highlightedyank'          " Make the yanked region apparent!
 Plugin 'arecarn/vim-crunch'                     " Calculations inside Vim :Crunch, g={motion}
 
-" Plugin 'sjl/gundo.vim'
-" Plugin 'simnalamburt/vim-mundo'
-" Plugin 'mbbill/undotree'
-
+Plugin 'mbbill/undotree'                        " The undo history visualizer for Vim
 Plugin 'mhinz/vim-grepper'                      " Helps you win at grep
 " Plugin 'vimwiki/vimwiki'
 
@@ -300,6 +297,9 @@ set wildignorecase
 set cursorline
 "set cursorcolumn
 
+" Display vertical line at column 80
+" set colorcolumn=80
+
 " Don't wrap lines by default
 set nowrap
 
@@ -353,8 +353,6 @@ set lazyredraw
 set nobackup
 set noswapfile
 
-" Display vertical line at column 80
-" set colorcolumn=80
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -404,10 +402,10 @@ autocmd BufWritePre,FileWritePre ?* silent :call <SID>StripTrailingWhitespace()
 " set foldclose=all      "close folds automatically when moving out of them
 augroup filetype_vim
     autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType cpp setlocal foldmethod=marker
+    autocmd FileType vim      setlocal foldmethod=marker
+    autocmd FileType cpp      setlocal foldmethod=marker
     autocmd FileType verilog* setlocal foldmethod=marker
-    autocmd FileType sh setlocal foldmethod=marker
+    autocmd FileType sh       setlocal foldmethod=marker
 augroup END
 
 " }}}
@@ -528,13 +526,8 @@ command! Zcpp       :-1r ~/.vim/mysnippets/cpp
 " au VimEnter ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " au VimLeave ?* !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 
-" Do the following to substitute old with new only within a rectangular visual block, that being a
-" Control-v style visual selection:
+" Substitute only within a rectangular visual block selection:
 " :'<,'>s/\%Vold/new
-
-" autocmd FileType verilog* iabbrev <buffer> w_ wire [:0] w_;<Esc>7ha
-" autocmd FileType verilog* iabbrev <buffer> r_ reg  [:0] r_;<Esc>7ha
-" autocmd FileType verilog* iabbrev <buffer> always <Esc>:Zalways<cr>
 
 " Toggle to ignore / not ignore whitespaces in vimdiff
 " if &diff
@@ -547,4 +540,3 @@ command! Zcpp       :-1r ~/.vim/mysnippets/cpp
 "       endif
 "     endfunction
 " endif
-
