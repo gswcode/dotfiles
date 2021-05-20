@@ -11,3 +11,9 @@
 	tool = vimdiff
 [credential "https://github.com"]
 	username = gs1293
+[init]
+	defaultBranch = main
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
