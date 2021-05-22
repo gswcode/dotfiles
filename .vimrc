@@ -17,105 +17,101 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugin Settings {{{
-
-filetype off                  " required
-
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
+" Vim-Plug Manager
+call plug#begin('~/.vim/plugged')
 
 " Active Plugins
-Plugin 'VundleVim/Vundle.vim'                   " PluginInstall/Clean/Update
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'      " Automatically toggles number settings
-Plugin 'vim-airline/vim-airline'                " lean & mean status/tabline for vim that's light as air
-Plugin 'godlygeek/tabular'                      " :Tab /{delimiter}
-Plugin 'junegunn/vim-easy-align'                " ga{motion}{delimiter}, use <C-x> to use any delimiter
-Plugin 'junegunn/fzf.vim'
-Plugin 'ctrlpvim/ctrlp.vim'                     " use :CtrlP instead since YankRing uses <C-p>, check for different solution
-Plugin 'fisadev/vim-ctrlp-cmdpalette'           " use :CtrlPCmdPalette
+Plug 'jeffkreeftmeijer/vim-numbertoggle'      " Automatically toggles number settings
+Plug 'vim-airline/vim-airline'                " lean & mean status/tabline for vim that's light as air
+Plug 'godlygeek/tabular'                      " :Tab /{delimiter}
+Plug 'junegunn/vim-easy-align'                " ga{motion}{delimiter}, use <C-x> to use any delimiter
 
-Plugin 'preservim/nerdtree'                     " tree explorer plugin for vim
-Plugin 'tpope/vim-vinegar'                      " - , enhancing netrw
-Plugin 'tpope/vim-commentary'                   " gc{motion}
-Plugin 'tpope/vim-surround'                     " cs{old identifier}{new identifier}
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-fugitive'
-" Plugin 'tpope/vim-obsession'
-" Plugin 'tpope/vim-sensible'
-" Plugin 'tpope/vim-scriptease'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-Plugin 'glts/vim-radical'                       " Convert decimal, hex, octal, binary number representations
-Plugin 'glts/vim-magnum'                        " Pure Vim script big integer library
+Plug 'ctrlpvim/ctrlp.vim'                     " use :CtrlP instead since YankRing uses <C-p>, check for different solution
+Plug 'fisadev/vim-ctrlp-cmdpalette'           " use :CtrlPCmdPalette
 
-Plugin 'haya14busa/is.vim'                      " incremental search improved
-Plugin 'osyo-manga/vim-anzu'                    " display search position like (2/10) for n/N commands
-Plugin 'haya14busa/vim-asterisk'                " asterisk.vim provides improved * motions
-Plugin 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
+Plug 'preservim/nerdtree'                     " tree explorer plugin for vim
+Plug 'tpope/vim-vinegar'                      " - , enhancing netrw
+Plug 'tpope/vim-commentary'                   " gc{motion}
+Plug 'tpope/vim-surround'                     " cs{old identifier}{new identifier}
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-sensible'
+" Plug 'tpope/vim-scriptease'
 
-Plugin 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
-" Plugin 'justinmk/vim-sneak'                     " Jump to any location specified by two characters, remaps s,S
-Plugin 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
-Plugin 'rhysd/clever-f.vim'                     " use f/F after f{char} instead of ;/, and t/T after t{char}
-Plugin 'terryma/vim-multiple-cursors'           " <C-n> to select multiple cursors
-Plugin 'tommcdo/vim-exchange'                   " cx{motion} Easy text exchange operator for Vim
-Plugin 'matze/vim-move'                         " Block move Ctrl+h/j/k/l, change redraw mapping
+Plug 'glts/vim-radical'                       " Convert decimal, hex, octal, binary number representations
+Plug 'glts/vim-magnum'                        " Pure Vim script big integer library
 
-Plugin 'mhinz/vim-startify'                     " fancy start screen for vim
-Plugin 'flazz/vim-colorschemes'                 " :colorscheme <scheme>
-Plugin 'Yggdroot/indentLine'                    " creates dotted lines to show code indentation
-Plugin 'luochen1990/rainbow'                    " Use different colors for nested parantheses
-Plugin 'thiagoalessio/rainbow_levels.vim'       " text color based on indentation, default off, :RainbowToggle
-Plugin 'junegunn/goyo.vim'                      " :Goyo, Distraction-free writing in Vim
-Plugin 'junegunn/limelight.vim'                 " :Limelight, Hyperfocus-writing in Vim
+Plug 'haya14busa/is.vim'                      " incremental search improved
+Plug 'osyo-manga/vim-anzu'                    " display search position like (2/10) for n/N commands
+Plug 'haya14busa/vim-asterisk'                " asterisk.vim provides improved * motions
+Plug 'markonm/traces.vim'                     " Range, pattern and substitute preview for Vim
 
-Plugin 'kana/vim-textobj-user'                  " use user defined text objects
-Plugin 'wellle/targets.vim'                     " Vim plugin that provides additional text objects
-Plugin 'andymass/vim-matchup'                   " even better % navigate and highlight matching words, modern matchit and matchparen replacement
-Plugin 'adriaanzon/vim-textobj-matchit'         " use am/im textobjects for matchit pairs
-Plugin 'michaeljsmith/vim-indent-object'        " defines a new text object representing lines of code at the same indent level
-Plugin 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
+Plug 'easymotion/vim-easymotion'              " [y|d|c]<leader><leader>{motion}{identifier}
+" Plug 'justinmk/vim-sneak'                     " Jump to any location specified by two characters, remaps s,S
+" Plug 'rhysd/accelerated-jk'                   " accelerate up-down moving using j/k
+Plug 'rhysd/clever-f.vim'                     " use f/F after f{char} instead of ;/, and t/T after t{char}
+Plug 'terryma/vim-multiple-cursors'           " <C-n> to select multiple cursors
+Plug 'tommcdo/vim-exchange'                   " cx{motion} Easy text exchange operator for Vim
+" Plug 'matze/vim-move'                         " Block move Ctrl+h/j/k/l, change redraw mapping
 
-Plugin 'raimondi/delimitmate'                   " automatically create bracket pairs in insert mode
-Plugin 'vim-scripts/VisIncr'                    " :I <increment>
-Plugin 'troydm/zoomwintab.vim'                  " use <C-w><C-o> to zoom in/out current buffer
-Plugin 'simeji/winresizer'                      " <C-e> + h/j/k/l to resize window
-Plugin 'mileszs/ack.vim'                        " sudo apt-get install ack-grep; use Ack! {pattern} {directory}; check ag.vim also
-Plugin 'francoiscabrol/ranger.vim'              " <leader>f opens ranger for file navigation
-Plugin 'lifepillar/vim-mucomplete'              " autocomplete plugin
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-colorscheme-switcher'
-Plugin 'idbrii/textobj-word-column.vim'
-Plugin 'tyru/open-browser.vim'                  " Open URL with your favorite browser from your most favorite editor
-Plugin 'machakann/vim-highlightedyank'          " Make the yanked region apparent!
-Plugin 'arecarn/vim-crunch'                     " Calculations inside Vim :Crunch, g={motion}
+Plug 'mhinz/vim-startify'                     " fancy start screen for vim
+Plug 'flazz/vim-colorschemes'                 " :colorscheme <scheme>
+Plug 'Yggdroot/indentLine'                    " creates dotted lines to show code indentation
+Plug 'luochen1990/rainbow'                    " Use different colors for nested parantheses
+Plug 'thiagoalessio/rainbow_levels.vim'       " text color based on indentation, default off, :RainbowToggle
+Plug 'junegunn/goyo.vim'                      " :Goyo, Distraction-free writing in Vim
+Plug 'junegunn/limelight.vim'                 " :Limelight, Hyperfocus-writing in Vim
 
-Plugin 'mbbill/undotree'                        " The undo history visualizer for Vim
-Plugin 'mhinz/vim-grepper'                      " Helps you win at grep
-" Plugin 'vimwiki/vimwiki'
+Plug 'kana/vim-textobj-user'                  " use user defined text objects
+Plug 'wellle/targets.vim'                     " Vim plugin that provides additional text objects
+Plug 'andymass/vim-matchup'                   " even better % navigate and highlight matching words, modern matchit and matchparen replacement
+Plug 'adriaanzon/vim-textobj-matchit'         " use am/im textobjects for matchit pairs
+Plug 'michaeljsmith/vim-indent-object'        " defines a new text object representing lines of code at the same indent level
+Plug 'terryma/vim-expand-region'              " Press + to expand the visual selection and _ to shrink it
 
-" Plugin 'w0rp/ale'                               " Asynchronous line engine
-" Plugin 'SirVer/ultisnips'                       " setup properly then use
-" Plugin 'honza/vim-snippets'                     " setup properly then use
+Plug 'raimondi/delimitmate'                   " automatically create bracket pairs in insert mode
+Plug 'vim-scripts/VisIncr'                    " :I <increment>
+Plug 'troydm/zoomwintab.vim'                  " use <C-w><C-o> to zoom in/out current buffer
+Plug 'simeji/winresizer'                      " <C-e> + h/j/k/l to resize window
+Plug 'mileszs/ack.vim'                        " sudo apt-get install ack-grep; use Ack! {pattern} {directory}; check ag.vim also
+Plug 'francoiscabrol/ranger.vim'              " <leader>f opens ranger for file navigation
+" Plug 'lifepillar/vim-mucomplete'              " autocomplete plugin
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'idbrii/textobj-word-column.vim'
+Plug 'tyru/open-browser.vim'                  " Open URL with your favorite browser from your most favorite editor
+Plug 'machakann/vim-highlightedyank'          " Make the yanked region apparent!
+Plug 'arecarn/vim-crunch'                     " Calculations inside Vim :Crunch, g={motion}
+
+Plug 'mbbill/undotree'                        " The undo history visualizer for Vim
+Plug 'mhinz/vim-grepper'                      " Helps you win at grep
+" Plug 'vimwiki/vimwiki'
+
+" Plug 'w0rp/ale'                               " Asynchronous line engine
+" Plug 'SirVer/ultisnips'                       " setup properly then use
+" Plug 'honza/vim-snippets'                     " setup properly then use
 
 " Language based plugins
-Plugin 'vim-syntastic/syntastic'                " Linter :SyntasticCheck, :SyntasticInfo
-Plugin 'plasticboy/vim-markdown'                " Syntax highlighting, matching rules and mappings for Markdown
-Plugin 'vhda/verilog_systemverilog.vim'         " Verilog/SystemVerilog Syntax and Omni-completion
-Plugin 'antoinemadec/vim-verilog-instance'      " create instantiation of ports from port declaration, gb{motion}
-Plugin 'mboughaba/i3config.vim'                 " Syntax highlighting for i3config
+Plug 'vim-syntastic/syntastic'                " Linter :SyntasticCheck, :SyntasticInfo
+Plug 'plasticboy/vim-markdown'                " Syntax highlighting, matching rules and mappings for Markdown
+Plug 'vhda/verilog_systemverilog.vim'         " Verilog/SystemVerilog Syntax and Omni-completion
+Plug 'antoinemadec/vim-verilog-instance'      " create instantiation of ports from port declaration, gb{motion}
+Plug 'mboughaba/i3config.vim'                 " Syntax highlighting for i3config
 
 " Enable only when needed
-" Plugin 'dhruvasagar/vim-table-mode'             " VIM Table Mode for instant table creation
+" Plug 'dhruvasagar/vim-table-mode'             " VIM Table Mode for instant table creation
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-
+" Initialize plugin system
+call plug#end()
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -152,22 +148,27 @@ let g:rainbow_levels = [
     \{'ctermfg': 7, 'guifg': '#f8f8f2'},
     \{'ctermfg': 0, 'guifg': '#75715e'}]
 
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
+" nmap j <Plug>(accelerated_jk_gj)
+" nmap k <Plug>(accelerated_jk_gk)
 
 let g:nrrw_rgn_vert = 1
 
 " Vim markdown plugin settings
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_no_default_key_mappings = 1
 
 " Mucomplete plugin settings
-set completeopt+=menuone
-set completeopt+=noselect
-set completeopt+=noinsert
-set shortmess+=c   " Shut off completion messages
-set belloff+=ctrlg " If Vim beeps during completion
-let g:mucomplete#enable_auto_at_startup = 1
+" set completeopt+=menuone
+" set completeopt+=noselect
+" set completeopt+=noinsert
+" set shortmess+=c   " Shut off completion messages
+" set belloff+=ctrlg " If Vim beeps during completion
+" let g:mucomplete#enable_auto_at_startup = 1
+" let g:mucomplete#chains = {}
+" let g:mucomplete#chains.default  = ['path', 'omni', 'keyn', 'dict', 'uspl', 'c-n', 'c-p', 'cmd', 'defs', 'file', 'incl', 'keyp', 'line', 'spel', 'tags', 'thes', 'user']
+
 
 let g:move_key_modifier = 'C'
 
@@ -184,6 +185,8 @@ map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 let g:asterisk#keeppos = 1
 
 let g:airline_powerline_fonts = 1
+
+let g:anzu_search_limit = 10000
 
 " }}}
 
@@ -391,7 +394,8 @@ function! <SID>StripTrailingWhitespace()
     call cursor(l, c)
 endfunction
 
-autocmd BufWritePre,FileWritePre ?* silent :call <SID>StripTrailingWhitespace()
+" autocmd BufWritePre,FileWritePre ?* silent :call <SID>StripTrailingWhitespace()
+command! StripWhitespace :silent :call <SID>StripTrailingWhitespace()
 
 " }}}
 
